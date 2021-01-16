@@ -3,7 +3,7 @@ server:
   address: 0.0.0.0
 lavalink:
   server:
-    password: "exeter"
+    password: "ezo"
     sources:
       youtube: true
       bandcamp: true
